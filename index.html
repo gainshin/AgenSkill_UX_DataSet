@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI/UX System Dataset - Local Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="title-row">
+                <h1>UX 系統數據集 for AI Agent <span class="en">(UX System Dataset for AI Agent)</span></h1>
+                <button class="version-toggle-btn" id="version-toggle" aria-expanded="false">
+                    <span class="version-icon">📋</span>
+                    <span class="version-text">查看版本更新</span>
+                    <span class="toggle-arrow">▼</span>
+                </button>
+            </div>
+            <div id="dashboard-stats" class="dashboard-stats">Loading stats...</div>
+            <nav>
+                <button class="nav-btn active" data-tab="styles">風格 (Styles)</button>
+                <button class="nav-btn" data-tab="colors">色彩 (Colors)</button>
+                <button class="nav-btn" data-tab="typography">字體 (Typography)</button>
+                <button class="nav-btn" data-tab="charts">圖表 (Charts)</button>
+                <button class="nav-btn" data-tab="stacks">技術棧 (Stacks)</button>
+                <button class="nav-btn" data-tab="guidelines">UX 準則 (UX Guidelines)</button>
+                <button class="nav-btn" data-tab="generator">UX agent Skills</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Expandable Version Info Panel -->
+    <div class="version-panel collapsed" id="version-panel">
+        <div class="container">
+            <div class="version-panel-content">
+                <div class="version-text-content">
+                    <p class="zh">
+                        本專案是一個面向 <strong>UX 設計師</strong> 的教育資源，旨在從人類用戶的瀏覽角度，
+                        幫助理解 <strong>AI Agent 的思維鏈 (Chain-of-Thought)</strong> 如何運用設計系統進行決策。
+                        涵蓋風格、色彩、字體、技術棧、UX 準則（含 Dark Pattern 辨識），以及調用 AI 技能 (UX agent skills)。
+                    </p>
+                    <p class="en">
+                        This project serves as an educational resource for <strong>UX designers</strong> to understand,
+                        from a human user's browsing perspective, how <strong>AI Agent Chain-of-Thought (COT)</strong>
+                        leverages design systems for decision-making. It covers styles, colors, typography, tech stacks,
+                        UX guidelines (including dark pattern detection), and calling AI skills (UX agent skills).
+                    </p>
+                </div>
+                <div class="version-badges">
+                    <span class="badge-item">📊 Design Systems</span>
+                    <span class="badge-item">🎨 Color Theory</span>
+                    <span class="badge-item">🔤 Typography</span>
+                    <span class="badge-item">⚠️ Dark Patterns</span>
+                    <span class="badge-item">🤖 AI COT</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div id="loader" class="loader">Loading data...</div>
+
+        <div id="styles-tab" class="tab-content active">
+            <div class="controls">
+                <input type="text" id="search-styles" placeholder="搜尋風格... (Search styles...)">
+                <div id="style-filters" class="filters-row">
+                    <!-- Filters populated by JS -->
+                </div>
+            </div>
+            <div id="styles-grid" class="grid"></div>
+        </div>
+
+
+        <div id="colors-tab" class="tab-content">
+            <div class="color-theory-intro">
+                <h3>🎨 色彩理論 (Color Theory)</h3>
+                <p>色彩在使用者看到內容之前就開始傳達訊息。精心設計的配色方案可以幫助使用者導航、理解優先順序，並與您的品牌建立連結。</p>
+                <div class="theory-cards">
+                    <div class="theory-card">
+                        <span class="theory-icon">🔵</span>
+                        <strong>主色 Primary</strong>
+                        <p>品牌核心色，佔據視覺主導地位</p>
+                    </div>
+                    <div class="theory-card">
+                        <span class="theory-icon">🟠</span>
+                        <strong>互補 Complementary</strong>
+                        <p>色輪對面 180°，形成強烈對比</p>
+                    </div>
+                    <div class="theory-card">
+                        <span class="theory-icon">🔺</span>
+                        <strong>三元 Triadic</strong>
+                        <p>色輪等距 120°，平衡且活潑</p>
+                    </div>
+                    <div class="theory-card">
+                        <span class="theory-icon">🌈</span>
+                        <strong>類似 Analogous</strong>
+                        <p>色輪相鄰，和諧且自然</p>
+                    </div>
+                </div>
+                <p class="citation">參考來源 Reference: <a
+                        href="https://www.figma.com/resource-library/website-color-schemes/" target="_blank">Figma - 53
+                        Unique Website Color Schemes</a></p>
+            </div>
+            <div class="color-picker-section">
+                <div class="color-wheel-container">
+                    <canvas id="color-wheel" width="200" height="200"></canvas>
+                    <div id="selected-color-preview"></div>
+                </div>
+                <div class="color-filter-options">
+                    <h4>選擇配色模式 (Color Harmony)</h4>
+                    <div class="harmony-buttons">
+                        <button class="harmony-btn active" data-mode="all">所有 (All)</button>
+                        <button class="harmony-btn" data-mode="primary">主色 (Primary)</button>
+                        <button class="harmony-btn" data-mode="complementary">互補 (Complementary)</button>
+                        <button class="harmony-btn" data-mode="triadic">三元 (Triadic)</button>
+                        <button class="harmony-btn" data-mode="analogous">類似 (Analogous)</button>
+                    </div>
+                    <p id="color-info">點擊色盤選擇顏色 (Click wheel to select color)</p>
+                </div>
+            </div>
+            <div class="controls">
+                <input type="text" id="search-colors" placeholder="搜尋色彩... (Search colors...)">
+            </div>
+            <div id="colors-grid" class="grid"></div>
+        </div>
+
+        <div id="typography-tab" class="tab-content">
+            <div class="controls">
+                <input type="text" id="search-typography" placeholder="搜尋字體... (Search fonts...)">
+            </div>
+            <div id="typography-grid" class="grid"></div>
+        </div>
+
+        <div id="charts-tab" class="tab-content">
+            <div class="controls">
+                <input type="text" id="search-charts" placeholder="搜尋圖表... (Search charts...)">
+            </div>
+            <div id="charts-grid" class="grid"></div>
+        </div>
+
+        <div id="stacks-tab" class="tab-content">
+            <div class="controls">
+                <input type="text" id="search-stacks" placeholder="搜尋技術棧... (Search stacks...)">
+            </div>
+            <div id="stacks-grid" class="grid"></div>
+        </div>
+
+        <div id="guidelines-tab" class="tab-content">
+            <!-- SCREEN 1: Persona Selection -->
+            <div id="guidelines-screen-persona" class="guidelines-screen active">
+                <!-- Guidelines Intro Section -->
+                <div class="guidelines-intro">
+                    <h2>⚠️ UX 設計準則與 Dark Pattern 識別 <span class="en">(UX Guidelines & Dark Pattern Detection)</span>
+                    </h2>
+                    <p class="zh">
+                        本區塊不僅是靜態準則清單，更提供 <strong>雙視角分析框架</strong>，幫助理解設計決策如何影響使用者與商業成果。
+                        每個案例都包含心理學原理、問題識別、重設計建議。
+                    </p>
+                    <p class="en">
+                        This section goes beyond static guidelines, offering a <strong>dual-perspective analysis
+                            framework</strong>
+                        to understand how design decisions impact users and business outcomes.
+                    </p>
+                </div>
+
+                <!-- Perspective Toggle -->
+                <div class="perspective-toggle-section">
+                    <h3>🔀 請先選擇分析視角 (Select Analysis Perspective First)</h3>
+                    <div class="perspective-cards">
+                        <div class="perspective-card" data-perspective="ic" onclick="selectPersona('ic')">
+                            <div class="perspective-icon">👩‍💻</div>
+                            <div class="perspective-header">
+                                <strong>IC 視角</strong>
+                                <span class="en">Individual Contributor</span>
+                            </div>
+                            <p>產品設計師/UX 研究員角度</p>
+                            <ul class="perspective-focus">
+                                <li>🔍 使用者體驗問題識別</li>
+                                <li>🧠 心理學原理應用</li>
+                                <li>🏷️ Deceptive Pattern 標註</li>
+                                <li>✏️ 重設計方案</li>
+                            </ul>
+                        </div>
+                        <div class="perspective-card" data-perspective="manager" onclick="selectPersona('manager')">
+                            <div class="perspective-icon">👔</div>
+                            <div class="perspective-header">
+                                <strong>Manager 視角</strong>
+                                <span class="en">Management Perspective</span>
+                            </div>
+                            <p>產品管理/商業策略角度</p>
+                            <ul class="perspective-focus">
+                                <li>⚠️ 風險管理評估</li>
+                                <li>📊 商業影響分析</li>
+                                <li>🏢 組織責任討論</li>
+                                <li>📈 KPI 與改善指標</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCREEN 2: Case Library -->
+            <div id="guidelines-screen-library" class="guidelines-screen hidden">
+                <button class="nav-back-btn" onclick="showScreen('persona')">← 重選視角 (Back)</button>
+
+                <div class="case-study-section">
+                    <h3>📚 互動式案例研究 (Interactive Case Studies)</h3>
+                    <p class="section-desc">您現在以 <span id="current-persona-badge">IC</span> 視角瀏覽。請選擇一個案例開始分析。</p>
+
+                    <div class="case-study-grid">
+                        <div class="case-study-card" data-case="account-deletion"
+                            onclick="selectCase('account-deletion')">
+                            <div class="case-category">Account Management</div>
+                            <h4>🗑️ Account Deletion Flow</h4>
+                            <p>帳號刪除流程中的 Data Hostage 模式識別</p>
+                            <div class="case-tags">
+                                <span class="tag-dark">Data Hostage</span>
+                                <span class="tag-psychology">Peak-End Rule</span>
+                            </div>
+                            <div class="case-actions">
+                                <span class="action-hint">點擊分析案例 (Analyze) →</span>
+                            </div>
+                        </div>
+
+                        <div class="case-study-card" data-case="logout-flow" onclick="selectCase('logout-flow')">
+                            <div class="case-category">Session Management</div>
+                            <h4>🚪 Log Out Flow</h4>
+                            <p>登出流程中的 Interaction Friction 分析</p>
+                            <div class="case-tags">
+                                <span class="tag-dark">Interaction Friction</span>
+                                <span class="tag-psychology">Jakob's Law</span>
+                            </div>
+                            <div class="case-actions">
+                                <span class="action-hint">點擊分析案例 (Analyze) →</span>
+                            </div>
+                        </div>
+
+                        <div class="case-study-card" data-case="macro-balance" onclick="selectCase('macro-balance')">
+                            <div class="case-category">Health Data</div>
+                            <h4>⚖️ Macro Balance Display</h4>
+                            <p>營養數據展示的 Confirmshaming 模式</p>
+                            <div class="case-tags">
+                                <span class="tag-dark">Confirmshaming</span>
+                                <span class="tag-psychology">Cognitive Dissonance</span>
+                            </div>
+                            <div class="case-actions">
+                                <span class="action-hint">點擊分析案例 (Analyze) →</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCREEN 3: Context Mode -->
+            <div id="guidelines-screen-context" class="guidelines-screen hidden">
+                <div class="context-header">
+                    <button class="nav-back-btn" onclick="showScreen('library')">← 返回案例列表 (Back to Library)</button>
+                    <div class="active-case-info">
+                        <span class="label">Current Analysis:</span>
+                        <strong id="active-case-title">Account Deletion Flow</strong>
+                    </div>
+                </div>
+
+                <!-- Psychology Principles Reference -->
+                <div class="psychology-section">
+                    <h3>🧠 心理學原理速查 (Psychology Principles Quick Reference)</h3>
+                    <div class="psychology-grid">
+                        <div class="psychology-card" data-tags="account-deletion peak-end-rule">
+                            <strong>Peak-End Rule</strong>
+                            <p>人們根據體驗的峰值和結尾來評判整體體驗，而非平均值。</p>
+                            <span class="psychology-apply">應用：確保關鍵流程（如註冊、購買）的結尾正面。</span>
+                        </div>
+                        <div class="psychology-card" data-tags="logout-flow jakob-law">
+                            <strong>Jakob's Law</strong>
+                            <p>使用者傾向期望你的網站與他們已知的網站運作方式相同。</p>
+                            <span class="psychology-apply">應用：遵循常見 UI 模式，減少學習成本。</span>
+                        </div>
+                        <div class="psychology-card" data-tags="macro-balance cognitive-dissonance">
+                            <strong>Cognitive Dissonance</strong>
+                            <p>當行為與信念矛盾時，人們會感到不適並尋求一致性。</p>
+                            <span class="psychology-apply">應用：避免讓使用者做出與其價值觀矛盾的選擇。</span>
+                        </div>
+                        <div class="psychology-card" data-tags="account-deletion loss-aversion">
+                            <strong>Loss Aversion</strong>
+                            <p>失去某物的痛苦是獲得同等價值事物快樂的兩倍。</p>
+                            <span class="psychology-apply">⚠️ 易被濫用於 Dark Patterns。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dark Pattern Taxonomy -->
+                <div class="dark-pattern-section">
+                    <h3>🏷️ Dark Pattern 分類法 (Deceptive Pattern Taxonomy)</h3>
+                    <div class="dark-pattern-grid">
+                        <div class="dark-pattern-item severity-high" data-tags="account-deletion">
+                            <strong>Data Hostage 資料挾持</strong>
+                            <p>讓使用者擔心刪除帳號會失去重要資料。</p>
+                        </div>
+                        <div class="dark-pattern-item severity-high" data-tags="macro-balance">
+                            <strong>Confirmshaming 羞辱確認</strong>
+                            <p>使用羞辱性語言讓使用者不敢選擇退出選項。</p>
+                        </div>
+                        <div class="dark-pattern-item severity-medium" data-tags="logout-flow">
+                            <strong>Interaction Friction 互動摩擦</strong>
+                            <p>在不希望使用者執行的操作上增加額外步驟。</p>
+                        </div>
+                        <div class="dark-pattern-item severity-medium">
+                            <strong>Roach Motel 易進難出</strong>
+                            <p>訂閱容易取消難，註冊容易刪帳難。</p>
+                        </div>
+                        <div class="dark-pattern-item severity-low">
+                            <strong>Hidden Costs 隱藏成本</strong>
+                            <p>在結帳最後才顯示額外費用。</p>
+                        </div>
+                        <div class="dark-pattern-item severity-low">
+                            <strong>Trick Questions 陷阱問題</strong>
+                            <p>使用雙重否定或混淆語言誤導使用者。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dark Pattern Annotated Cases Section -->
+                <div class="dark-pattern-annotated-section">
+                    <h3>🔍 Dark Pattern 標註案例庫 (Annotated Dark Pattern Cases)</h3>
+                    <p class="section-desc">基於 AidUI 數據集結構，展示真實 UI 截圖 + 元件標註 + AI Agent COT 分析</p>
+
+                    <!-- Case Filter -->
+                    <div class="dp-filter-bar">
+                        <select id="dp-filter-severity">
+                            <option value="all">所有嚴重度 (All Severity)</option>
+                            <option value="High">High 🔴</option>
+                            <option value="Medium">Medium 🟡</option>
+                            <option value="Low">Low 🟢</option>
+                        </select>
+                        <select id="dp-filter-type">
+                            <option value="all">所有類型 (All Types)</option>
+                            <option value="Dark">Dark Patterns</option>
+                            <option value="Good">Good Examples</option>
+                            <option value="Neutral">Neutral</option>
+                        </select>
+                        <select id="dp-filter-platform">
+                            <option value="all">所有平台 (All Platforms)</option>
+                            <option value="Web">Web</option>
+                            <option value="Mobile">Mobile</option>
+                        </select>
+                    </div>
+
+                    <!-- Cases Grid -->
+                    <div id="dark-pattern-cases-grid" class="dp-cases-grid">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Modal for Detailed View -->
+                    <div id="dp-modal" class="dp-modal hidden">
+                        <div class="dp-modal-content">
+                            <button class="dp-modal-close" aria-label="Close">&times;</button>
+
+                            <div class="dp-modal-body">
+                                <!-- Left: Screenshot with Bounding Boxes -->
+                                <div class="dp-screenshot-panel">
+                                    <h4>📸 UI Screenshot</h4>
+                                    <div class="screenshot-container">
+                                        <img id="dp-screenshot-img" src="" alt="Dark pattern screenshot">
+                                        <svg id="dp-bounding-boxes" class="bounding-boxes-overlay"
+                                            viewBox="0 0 1200 800">
+                                            <!-- Bounding boxes will be drawn here -->
+                                        </svg>
+                                    </div>
+                                    <div class="screenshot-meta">
+                                        <span id="dp-meta-url"></span>
+                                        <span id="dp-meta-platform"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Right: COT Analysis -->
+                                <div class="dp-analysis-panel">
+                                    <div class="dp-pattern-badge">
+                                        <span id="dp-badge-type" class="pattern-type-badge"></span>
+                                        <span id="dp-badge-severity" class="severity-badge"></span>
+                                    </div>
+
+                                    <h4>🏷️ Pattern Details</h4>
+                                    <div class="dp-detail-item">
+                                        <strong>Subtype:</strong> <span id="dp-subtype"></span>
+                                    </div>
+                                    <div class="dp-detail-item">
+                                        <strong>Psychology:</strong> <span id="dp-psychology"></span>
+                                    </div>
+                                    <div class="dp-detail-item">
+                                        <strong>Component:</strong> <span id="dp-component"></span>
+                                    </div>
+
+                                    <h4>🤖 AI Agent COT Analysis</h4>
+
+                                    <div class="cot-step">
+                                        <div class="cot-step-header">
+                                            <span class="cot-number">1️⃣</span>
+                                            <strong>觀察 (Observation)</strong>
+                                        </div>
+                                        <p id="dp-cot-observation" class="cot-content"></p>
+                                    </div>
+
+                                    <div class="cot-step">
+                                        <div class="cot-step-header">
+                                            <span class="cot-number">2️⃣</span>
+                                            <strong>推理 (Reasoning)</strong>
+                                        </div>
+                                        <p id="dp-cot-reasoning" class="cot-content"></p>
+                                    </div>
+
+                                    <div class="cot-step">
+                                        <div class="cot-step-header">
+                                            <span class="cot-number">3️⃣</span>
+                                            <strong>改善建議 (Remediation)</strong>
+                                        </div>
+                                        <div id="dp-cot-remediation" class="cot-content remediation-list"></div>
+                                    </div>
+
+                                    <div class="dp-citation-section">
+                                        <h5>📚 Citations / 引用出處</h5>
+                                        <p id="dp-citation" class="citation-text"></p>
+                                        <a id="dp-citation-link" href="#" target="_blank" class="citation-link">🔗 View
+                                            Source</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Psychology Principles Reference -->
+            <div class="psychology-section">
+                <h3>🧠 心理學原理速查 (Psychology Principles Quick Reference)</h3>
+                <div class="psychology-grid">
+                    <div class="psychology-card">
+                        <strong>Peak-End Rule</strong>
+                        <p>人們根據體驗的峰值和結尾來評判整體體驗，而非平均值。</p>
+                        <span class="psychology-apply">應用：確保關鍵流程（如註冊、購買）的結尾正面。</span>
+                    </div>
+                    <div class="psychology-card">
+                        <strong>Jakob's Law</strong>
+                        <p>使用者傾向期望你的網站與他們已知的網站運作方式相同。</p>
+                        <span class="psychology-apply">應用：遵循常見 UI 模式，減少學習成本。</span>
+                    </div>
+                    <div class="psychology-card">
+                        <strong>Cognitive Dissonance</strong>
+                        <p>當行為與信念矛盾時，人們會感到不適並尋求一致性。</p>
+                        <span class="psychology-apply">應用：避免讓使用者做出與其價值觀矛盾的選擇。</span>
+                    </div>
+                    <div class="psychology-card">
+                        <strong>Loss Aversion</strong>
+                        <p>失去某物的痛苦是獲得同等價值事物快樂的兩倍。</p>
+                        <span class="psychology-apply">⚠️ 易被濫用於 Dark Patterns。</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dark Pattern Taxonomy -->
+            <div class="dark-pattern-section">
+                <h3>🏷️ Dark Pattern 分類法 (Deceptive Pattern Taxonomy)</h3>
+                <div class="dark-pattern-grid">
+                    <div class="dark-pattern-item severity-high">
+                        <strong>Data Hostage 資料挾持</strong>
+                        <p>讓使用者擔心刪除帳號會失去重要資料。</p>
+                    </div>
+                    <div class="dark-pattern-item severity-high">
+                        <strong>Confirmshaming 羞辱確認</strong>
+                        <p>使用羞辱性語言讓使用者不敢選擇退出選項。</p>
+                    </div>
+                    <div class="dark-pattern-item severity-medium">
+                        <strong>Interaction Friction 互動摩擦</strong>
+                        <p>在不希望使用者執行的操作上增加額外步驟。</p>
+                    </div>
+                    <div class="dark-pattern-item severity-medium">
+                        <strong>Roach Motel 易進難出</strong>
+                        <p>訂閱容易取消難，註冊容易刪帳難。</p>
+                    </div>
+                    <div class="dark-pattern-item severity-low">
+                        <strong>Hidden Costs 隱藏成本</strong>
+                        <p>在結帳最後才顯示額外費用。</p>
+                    </div>
+                    <div class="dark-pattern-item severity-low">
+                        <strong>Trick Questions 陷阱問題</strong>
+                        <p>使用雙重否定或混淆語言誤導使用者。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dark Pattern Annotated Cases Section -->
+            <div class="dark-pattern-annotated-section">
+                <h3>🔍 Dark Pattern 標註案例庫 (Annotated Dark Pattern Cases)</h3>
+                <p class="section-desc">基於 AidUI 數據集結構，展示真實 UI 截圖 + 元件標註 + AI Agent COT 分析</p>
+
+                <!-- Case Filter -->
+                <div class="dp-filter-bar">
+                    <select id="dp-filter-severity">
+                        <option value="all">所有嚴重度 (All Severity)</option>
+                        <option value="High">High 🔴</option>
+                        <option value="Medium">Medium 🟡</option>
+                        <option value="Low">Low 🟢</option>
+                    </select>
+                    <select id="dp-filter-type">
+                        <option value="all">所有類型 (All Types)</option>
+                        <option value="Dark">Dark Patterns</option>
+                        <option value="Good">Good Examples</option>
+                        <option value="Neutral">Neutral</option>
+                    </select>
+                    <select id="dp-filter-platform">
+                        <option value="all">所有平台 (All Platforms)</option>
+                        <option value="Web">Web</option>
+                        <option value="Mobile">Mobile</option>
+                    </select>
+                </div>
+
+                <!-- Cases Grid -->
+                <div id="dark-pattern-cases-grid" class="dp-cases-grid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+
+                <!-- Modal for Detailed View -->
+                <div id="dp-modal" class="dp-modal hidden">
+                    <div class="dp-modal-content">
+                        <button class="dp-modal-close" aria-label="Close">&times;</button>
+
+                        <div class="dp-modal-body">
+                            <!-- Left: Screenshot with Bounding Boxes -->
+                            <div class="dp-screenshot-panel">
+                                <h4>📸 UI Screenshot</h4>
+                                <div class="screenshot-container">
+                                    <img id="dp-screenshot-img" src="" alt="Dark pattern screenshot">
+                                    <svg id="dp-bounding-boxes" class="bounding-boxes-overlay" viewBox="0 0 1200 800">
+                                        <!-- Bounding boxes will be drawn here -->
+                                    </svg>
+                                </div>
+                                <div class="screenshot-meta">
+                                    <span id="dp-meta-url"></span>
+                                    <span id="dp-meta-platform"></span>
+                                </div>
+                            </div>
+
+                            <!-- Right: COT Analysis -->
+                            <div class="dp-analysis-panel">
+                                <div class="dp-pattern-badge">
+                                    <span id="dp-badge-type" class="pattern-type-badge"></span>
+                                    <span id="dp-badge-severity" class="severity-badge"></span>
+                                </div>
+
+                                <h4>🏷️ Pattern Details</h4>
+                                <div class="dp-detail-item">
+                                    <strong>Subtype:</strong> <span id="dp-subtype"></span>
+                                </div>
+                                <div class="dp-detail-item">
+                                    <strong>Psychology:</strong> <span id="dp-psychology"></span>
+                                </div>
+                                <div class="dp-detail-item">
+                                    <strong>Component:</strong> <span id="dp-component"></span>
+                                </div>
+
+                                <h4>🤖 AI Agent COT Analysis</h4>
+
+                                <div class="cot-step">
+                                    <div class="cot-step-header">
+                                        <span class="cot-number">1️⃣</span>
+                                        <strong>觀察 (Observation)</strong>
+                                    </div>
+                                    <p id="dp-cot-observation" class="cot-content"></p>
+                                </div>
+
+                                <div class="cot-step">
+                                    <div class="cot-step-header">
+                                        <span class="cot-number">2️⃣</span>
+                                        <strong>推理 (Reasoning)</strong>
+                                    </div>
+                                    <p id="dp-cot-reasoning" class="cot-content"></p>
+                                </div>
+
+                                <div class="cot-step">
+                                    <div class="cot-step-header">
+                                        <span class="cot-number">3️⃣</span>
+                                        <strong>改善建議 (Remediation)</strong>
+                                    </div>
+                                    <div id="dp-cot-remediation" class="cot-content remediation-list"></div>
+                                </div>
+
+                                <div class="dp-citation-section">
+                                    <h5>📚 Citations / 引用出處</h5>
+                                    <p id="dp-citation" class="citation-text"></p>
+                                    <a id="dp-citation-link" href="#" target="_blank" class="citation-link">🔗 View
+                                        Source</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- References Section -->
+                <div class="references-section">
+                    <h4>📚 References / 參考文獻</h4>
+                    <ol class="references-list">
+                        <li id="ref-lee2025">
+                            Lee, J., Kim, S., Park, H. (2025).
+                            <em>Building UI/UX Dataset for Dark Pattern Detection and YOLOv12x-based Real-Time Object
+                                Recognition Detection System</em>.
+                            arXiv:2512.18269.
+                            <a href="https://arxiv.org/abs/2512.18269"
+                                target="_blank">https://arxiv.org/abs/2512.18269</a>
+                        </li>
+                        <li id="ref-brignull2023">
+                            Brignull, H. (2023). <em>Dark Patterns Taxonomy</em>. Deceptive.design.
+                            <a href="https://www.deceptive.design" target="_blank">https://www.deceptive.design</a>
+                        </li>
+                        <li id="ref-gray2018">
+                            Gray, C. M., Kou, Y., Battles, B., Hoggatt, J., & Toombs, A. L. (2018).
+                            <em>The Dark (Patterns) Side of UX Design</em>. CHI 2018.
+                        </li>
+                        <li id="ref-mathur2019">
+                            Mathur, A., Acar, G., Friedman, M. J., Lucherini, E., Mayer, J., Chetty, M., & Narayanan, A.
+                            (2019).
+                            <em>Dark Patterns at Scale: Findings from a Crawl of 11K Shopping Websites</em>. CHI 2019.
+                        </li>
+                        <li id="ref-wcag">
+                            W3C. (2018). <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>.
+                            <a href="https://www.w3.org/TR/WCAG21/" target="_blank">https://www.w3.org/TR/WCAG21/</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Standard Guidelines Filter -->
+
+        <div id="generator-tab" class="tab-content">
+            <div class="generator-container">
+                <div class="generator-header">
+                    <h2>🧠 UX Agent 技能庫</h2>
+                    <p class="subtitle">來自 skills.rest 的精選技能與核心能力 <span class="en">(Curated Skills from skills.rest &
+                            Core Competencies)</span></p>
+                </div>
+
+                <div class="skill-cards-container">
+
+                    <!-- Category: UX/UI Design -->
+                    <div class="skill-category-group">
+                        <h3>🎨 UX/UI 設計技能 <span
+                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(UX/UI Design
+                                Skills)</span></h3>
+                        <div class="skill-grid">
+                            <div class="skill-card">
+                                <h4>ui-ux-pro-max</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>快速設計精美的 UI/UX。規劃與實作使用者介面。<br><span class="en">Design stunning UI/UX fast. Plan and
+                                        implement UI.</span></p>
+                                <a href="https://skills.rest/skill/ui-ux-pro-max" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>frontend-design</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>製作具有獨特風格的生產級 UI (nbarthelemy)。<br><span class="en">Unique style production-ready
+                                        UI.</span></p>
+                                <a href="https://skills.rest/skill/frontend-design" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>figma-analyzer</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>透過 API 從 Figma 提取設計資源。<br><span class="en">Extract design assets from Figma via
+                                        API.</span></p>
+                                <a href="https://skills.rest/skill/figma-analyzer" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>design-system</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>簡化設計 Token 與 UI 架構。<br><span class="en">Streamline design tokens and UI
+                                        architecture.</span></p>
+                                <a href="https://skills.rest/skill/design-system" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>unsplash-image-finder</h4>
+                                <span class="skill-tag">官方 Official</span>
+                                <p>即時獲取完美的 Unsplash 圖片。<br><span class="en">Instantly fetch perfect Unsplash
+                                        images.</span></p>
+                                <a href="https://skills.rest/skill/unsplash-image-finder" target="_blank">查看技能 View
+                                    Skill</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: CSS & Animation (New) -->
+                    <div class="skill-category-group">
+                        <h3>💅 CSS 與動畫技能 <span
+                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(CSS &
+                                Animation)</span></h3>
+                        <div class="skill-grid">
+                            <div class="skill-card">
+                                <h4>css</h4>
+                                <span class="skill-tag">社群 Community</span>
+                                <p>製作可擴展、響應式的 CSS 模式。<br><span class="en">Scalable, responsive CSS patterns.</span></p>
+                                <a href="https://skills.rest/skill/css" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>tailwind</h4>
+                                <span class="skill-tag">社群 Community</span>
+                                <p>使用 Tailwind 打造可擴展 UI。<br><span class="en">Scalable UI with Tailwind.</span></p>
+                                <a href="https://skills.rest/skill/tailwind" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>gsap</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>製作高性能 GSAP 動畫。<br><span class="en">High-performance GSAP animations.</span></p>
+                                <a href="https://skills.rest/skill/gsap" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>coverflow</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>安全旋轉的 3D coverflow 輪播。<br><span class="en">Secure rotatable 3D coverflow
+                                        carousel.</span></p>
+                                <a href="https://skills.rest/skill/coverflow" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>canvas-effects</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>製作高性能 Canvas 視覺效果。<br><span class="en">High-performance Canvas visual effects.</span>
+                                </p>
+                                <a href="https://skills.rest/skill/canvas-effects" target="_blank">查看技能 View Skill</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Front-End Development -->
+                    <div class="skill-category-group">
+                        <h3>💻 前端開發技能 <span
+                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(Front-End
+                                Development)</span></h3>
+                        <div class="skill-grid">
+                            <div class="skill-card">
+                                <h4>senior-frontend</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>自動化前端工作流程與腳手架。<br><span class="en">Automate frontend workflows & scaffolding.</span>
+                                </p>
+                                <a href="https://skills.rest/skill/senior-frontend" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>flow-error-eslint-compliance</h4>
+                                <span class="skill-tag">官方 Official</span>
+                                <p>修復遷移後的 ESLint 問題。<br><span class="en">Fix ESLint issues post-migration.</span></p>
+                                <a href="https://skills.rest/skill/flow-error-eslint-compliance" target="_blank">查看技能
+                                    View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>run-linters</h4>
+                                <span class="skill-tag">官方 Official</span>
+                                <p>執行 Linter 驗證程式碼品質。<br><span class="en">Run linters to verify code quality after
+                                        changes.</span></p>
+                                <a href="https://skills.rest/skill/run-linters" target="_blank">查看技能 View Skill</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Dev Tools -->
+                    <div class="skill-category-group">
+                        <h3>🔧 開發工具 <span
+                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(Development
+                                Tools)</span></h3>
+                        <div class="skill-grid">
+                            <div class="skill-card">
+                                <h4>code-review</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>系統化的程式碼審查，確保品質與安全性。<br><span class="en">Systematic code reviews for quality and
+                                        security.</span></p>
+                                <a href="https://skills.rest/skill/code-review" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>naming</h4>
+                                <span class="skill-tag">社群 Community</span>
+                                <p>語義化、可排序的命名慣例。<br><span class="en">Semantic, sortable naming conventions.</span></p>
+                                <a href="https://skills.rest/skill/naming" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>quality-gate</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>提交與部署前的品質閘門。<br><span class="en">Quality gates before commits and deployments.</span>
+                                </p>
+                                <a href="https://skills.rest/skill/quality-gate" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>create-pr</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>從程式碼變更生成 PR 內容。<br><span class="en">Generate PR content from code changes.</span></p>
+                                <a href="https://skills.rest/skill/create-pr" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>create-issue</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>自動在 GitHub 或 Jira 建立議題。<br><span class="en">Automatically file issues in GitHub or
+                                        Jira.</span></p>
+                                <a href="https://skills.rest/skill/create-issue" target="_blank">查看技能 View Skill</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: API & Architecture -->
+                    <div class="skill-category-group">
+                        <h3>🎯 API 與架構 <span
+                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(API &
+                                Architecture)</span></h3>
+                        <div class="skill-grid">
+                            <div class="skill-card">
+                                <h4>api-design-principles</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>REST 與 GraphQL API 設計，打造可擴展的 API。<br><span class="en">REST & GraphQL API design for
+                                        scalable APIs.</span></p>
+                                <a href="https://skills.rest/skill/api-design-principles" target="_blank">查看技能 View
+                                    Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>orchestrate-spec</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>自動偵測待處理元件並起草規格。<br><span class="en">Auto-detects next pending component and drafts
+                                        specs.</span></p>
+                                <a href="https://skills.rest/skill/orchestrate-spec" target="_blank">查看技能 View Skill</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Design & Creative -->
+                    <div class="skill-category-group">
+                        <h3>📐 設計與創意工具 <span
+                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(Design &
+                                Creative Tools)</span></h3>
+                        <div class="skill-grid">
+                            <div class="skill-card">
+                                <h4>prompt-engineering-patterns</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>設計可靠、高品質的提示詞模式。<br><span class="en">Design prompts that yield reliable, high-quality
+                                        outputs.</span></p>
+                                <a href="https://skills.rest/skill/prompt-engineering-patterns" target="_blank">查看技能
+                                    View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>obsidian-canvas</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>自動生成 Obsidian Canvas 知識地圖佈局。<br><span class="en">Auto-generate Obsidian Canvas
+                                        knowledge map layouts.</span></p>
+                                <a href="https://skills.rest/skill/obsidian-canvas" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>markdown-slides</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>從 Markdown 內容建立 Deckset/Marp 簡報。<br><span class="en">Create Deckset/Marp slides from
+                                        Markdown content.</span></p>
+                                <a href="https://skills.rest/skill/markdown-slides" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>markdown-video</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>將 markdown 簡報轉為有旁白的影片。<br><span class="en">Convert markdown to narrated video
+                                        (Gemini/OpenAI).</span></p>
+                                <a href="https://skills.rest/skill/markdown-video" target="_blank">查看技能 View Skill</a>
+                            </div>
+                            <div class="skill-card">
+                                <h4>pptx</h4>
+                                <span class="skill-tag">進階 Advanced</span>
+                                <p>程式化建立與編輯 PowerPoint 簡報。<br><span class="en">Create and edit PowerPoint presentations
+                                        programmatically.</span></p>
+                                <a href="https://skills.rest/skill/pptx" target="_blank">查看技能 View Skill</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="license-notice">
+                📖 本資料集僅供教育與研究用途，商用需取得授權。引用時請標註完整來源。<br>
+                <span class="en">This dataset is for educational and research purposes only. Commercial use requires
+                    permission. Please cite the full source when referencing.</span>
+            </p>
+            <p class="copyright">
+                &copy; 2025 <strong>PrivacyUX Consulting Ltd.</strong> All rights reserved. |
+                Licensed under <a href="https://github.com/gainshin/ui-ux-pro-design_system/blob/main/LICENSE"
+                    target="_blank">CC BY-NC 4.0</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Floating Clear Style Button -->
+    <button class="clear-style-btn hidden" id="clear-style-btn">
+        <span class="clear-icon">✕</span>
+        <span class="clear-text">清除樣式 (Clear Style)</span>
+    </button>
+
+    <script src="data.js"></script>
+    <script src="viewer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitePal Settings 設計審查</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --accent-color: #6366f1;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --card-bg: #ffffff;
+            --slide-width: 1200px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .slide-indicator {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        main {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slides-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateX(50px);
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-50px);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: var(--slide-width);
+            width: 100%;
+            height: 85vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .panel-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tag.risk-high {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .tag.risk-med {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .tag.risk-low {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+
+        .tag.improvement {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .image-container {
+            flex: 1;
+            background: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-notes {
+            margin-top: 1rem;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .review-notes strong {
+            color: #1e293b;
+        }
+
+        .review-notes ul {
+            padding-left: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .review-notes li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Mockup Styles */
+        .mockup-container {
+            flex: 1;
+            background: #f1f5f9;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mockup-frame {
+            width: 375px;
+            height: 100%;
+            max-height: 812px;
+            background: white;
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 1px solid #e2e8f0;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-btn.prev {
+            left: 2rem;
+        }
+
+        .nav-btn.next {
+            right: 2rem;
+        }
+
+        .nav-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #1e293b;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Slide Specific Mockup CSS */
+        .btn-base {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #1e293b;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #64748b;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Interactive Sidebar Styles */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 900;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #64748b;
+            padding: 5px;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 0.5rem;
+            color: #475569;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-item:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .nav-item.active {
+            background: #eef2ff;
+            color: #6366f1;
+            font-weight: 600;
+        }
+
+        /* Lexicon Styles (Unified) */
+        .lexicon-section {
+            padding-top: 0.5rem;
+        }
+
+        .lexicon-category {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .lexicon-item {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+            border-left: 2px solid transparent;
+            margin-bottom: 0.25rem;
+            border-bottom: none;
+            /* Override previous */
+        }
+
+        .lexicon-item strong {
+            display: block;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .lexicon-item span {
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .lexicon-item:hover {
+            background: #f8fafc;
+            border-left-color: #cbd5e1;
+        }
+
+        /* FAB Controls */
+        .fab-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 500;
+        }
+
+        .fab {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .fab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .fab-tooltip {
+            position: absolute;
+            right: 70px;
+            background: #1e293b;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .fab:hover .fab-tooltip {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <header>
+        <h1>BitePal Settings 設計審查與優化建議</h1>
+        <div class="slide-indicator" id="slideIndicator">1 / 7</div>
+    </header>
+
+    <main>
+        <button class="nav-btn prev" onclick="prevSlide()" aria-label="Previous Slide">
+            <svg viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <button class="nav-btn next" onclick="nextSlide()" aria-label="Next Slide">
+            <svg viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+        <div class="slides-container">
+
+            <!-- Slide 1: Cover -->
+            <div class="slide active">
+                <div style="text-align: center; max-width: 600px;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">BitePal Settings 設計審查</h2>
+                    <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6;">
+                        針對 Settings 相關頁面（帳號刪除、登出、巨量營養素、飲食偏好等）的潛在 Deceptive Pattern 進行與優化分析。
+                    </p>
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+                        <span class="tag risk-high" style="padding: 0.5rem 1rem;">Data Hostage</span>
+                        <span class="tag risk-med" style="padding: 0.5rem 1rem;">Confirmshaming</span>
+                        <span class="tag improvement" style="padding: 0.5rem 1rem;">透明度優化</span>
+                    </div>
+                    <button class="btn-primary" style="margin-top: 3rem; width: auto; padding: 1rem 2rem;"
+                        onclick="nextSlide()">開始審查</button>
+                </div>
+            </div>
+
+            <!-- Slide 2: Account Deletion Flow -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <!-- Original UI -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">Account Deletion <span class="tag risk-high">資料挾持</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/13_Settings_Delete_Confirm.png" alt="Original Delete UI">
+                        </div>
+                        <div class="review-notes">
+                            <strong>發現的問題 (Issues):</strong>
+                            <ul>
+                                <li><strong>交互阻礙 (Interaction Friction):</strong> 刪除按鈕被隱藏在 "Pause Account"
+                                    之後，且缺乏明確的導航路徑，違反 <strong>Jakob's Law</strong> (用戶預期標準的刪除流程)。</li>
+                                <li><strong>UX 文案 (Micro-copy):</strong> "Permanently Delete" 使用紅色警示，但未提供 "Export" 選項，製造
+                                    <strong>Fear, Uncertainty, and Doubt (FUD)</strong>。
+                                </li>
+                                <li><strong>心理學原理 (Psychology):</strong> <strong>Peak-End Rule</strong> —
+                                    離場體驗的痛苦將主導用戶對產品的整體記憶，導致負面口碑。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Redesigned UI -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag improvement">知情與自主</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-frame" style="padding: 20px; justify-content: center;">
+                                <h3 style="text-align: center; color: #ef4444; margin-bottom: 20px;">刪除帳號？</h3>
+                                <p style="text-align: center; color: #64748b; font-size: 0.9rem; margin-bottom: 30px;">
+                                    此動作將永久移除您的所有飲食記錄、體重數據與個人化設定。您有 30 天的後悔期。
+                                </p>
+
+                                <button
+                                    style="background: white; border: 1px solid #cbd5e1; color: #1e293b; padding: 12px; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                    <span>📥</span> 先匯出我的資料 (JSON)
+                                </button>
+
+                                <button
+                                    style="background: white; border: 1px solid #cbd5e1; color: #1e293b; padding: 12px; border-radius: 8px; margin-bottom: 40px;">
+                                    ⏸️ 暫停帳號（保留數據）
+                                </button>
+
+                                <button class="btn-danger" style="margin-bottom: 15px;">永久刪除帳號</button>
+                                <button class="btn-ghost" style="color: #64748b;">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Log Out Flow -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">Log Out Flow <span class="tag risk-med">情感操縱</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/13_Settings_Logout_Confirm.png" alt="Original Logout UI">
+                        </div>
+                        <div class="review-notes">
+                            <strong>發現的問題 (Issues):</strong>
+                            <ul>
+                                <li><strong>UX 文案 (Copywriting):</strong> "Caramel will miss you a lot" 利用與虛擬角色的擬社會關係
+                                    (Parasocial Relationship) 進行情感勒索。</li>
+                                <li><strong>交互欺騙 (Interaction Deception):</strong> <strong>Confirmshaming</strong> —
+                                    強迫用戶在「傷害小動物」與「順從平台」間做選擇，製造 <strong>Cognitive Dissonance (認知失調)</strong>。</li>
+                                <li><strong>視覺層級:</strong> "Log out" 按鈕呈現為危險/負面操作，與用戶單純的「登出」意圖不符。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag improvement">中性尊重</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-frame"
+                                style="padding: 20px; justify-content: center; align-items: center;">
+                                <div
+                                    style="width: 80px; height: 80px; background: #e2e8f0; border-radius: 50%; margin-bottom: 20px;">
+                                </div>
+                                <h3 style="margin-bottom: 10px;">確定要登出嗎？</h3>
+                                <p style="text-align: center; color: #64748b; font-size: 0.9rem; margin-bottom: 30px;">
+                                    您的資料已安全儲存。隨時歡迎回來。
+                                </p>
+
+                                <div style="display: flex; gap: 10px; width: 100%;">
+                                    <button class="btn-outline" style="flex: 1;">取消</button>
+                                    <button class="btn-outline"
+                                        style="flex: 1; color: #ef4444; border-color: #fca5a5;">登出</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Macro Balance -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">Macro Balance <span class="tag risk-med">強制精確</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/13_Settings_Macro_01_100Percent.png" alt="Original Macro UI">
+                        </div>
+                        <div class="review-notes">
+                            <strong>發現的問題 (Issues):</strong>
+                            <ul>
+                                <li><strong>違反 Postel's Law (Robustness Principle):</strong> 系統對輸入要求過於嚴格 ("Must equal
+                                    100%")，未能寬容處理用戶的近似值輸入。</li>
+                                <li><strong>交互挫折 (Friction):</strong> 強迫用戶進行微積分般的數字調整 (Total: 98%)，增加了不必要的
+                                    <strong>Cognitive Load (認知負荷)</strong>。
+                                </li>
+                                <li><strong>缺乏解釋:</strong> 預設比例未提供營養學依據，缺乏 <strong>Transparency (透明度)</strong>。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag improvement">彈性引導</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-frame" style="padding: 20px;">
+                                <h3 style="margin-bottom: 20px;">巨量營養素目標</h3>
+
+                                <div style="display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto;">
+                                    <span
+                                        style="background: #e0e7ff; color: #4338ca; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; white-space: nowrap;">Balanced</span>
+                                    <span
+                                        style="background: #f1f5f9; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; white-space: nowrap;">Keto</span>
+                                    <span
+                                        style="background: #f1f5f9; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; white-space: nowrap;">High-Protein</span>
+                                </div>
+
+                                <div class="card">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                        <span>Carbs</span>
+                                        <span>50%</span>
+                                    </div>
+                                    <input type="range" value="50" style="width: 100%;">
+                                </div>
+                                <div class="card">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                        <span>Protein</span>
+                                        <span>20%</span>
+                                    </div>
+                                    <input type="range" value="20" style="width: 100%;">
+                                </div>
+                                <div class="card">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                        <span>Fat</span>
+                                        <span>28%</span>
+                                    </div>
+                                    <input type="range" value="28" style="width: 100%;">
+                                </div>
+
+                                <p style="font-size: 0.8rem; color: #f59e0b; text-align: center;">
+                                    目前總計: 98% (建議調整至 100%，但仍可儲存)
+                                </p>
+                                <button class="btn-primary" style="margin-top: 10px;">儲存變更</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Eating Preferences -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">Eating Preferences <span class="tag risk-low">窄化框架</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/01_Quiz_09_Restrictions_Selected.png"
+                                alt="Original Preferences UI">
+                        </div>
+                        <div class="review-notes">
+                            <strong>發現的問題 (Issues):</strong>
+                            <ul>
+                                <li><strong>框架窄化 (Narrow Framing):</strong> 僅提供二元選項 (Select/Deselect)，忽略了「過敏」與「偏好」的關鍵差異。
+                                </li>
+                                <li><strong>系統狀態可見性 (Visibility of System Status):</strong> 用戶無法區分 "Excluded" 的原因，導致 AI
+                                    推薦可能不精準（例如：不喜歡吃 vs 吃了會休克）。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag improvement">精確情境</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-frame" style="padding: 20px;">
+                                <h3 style="margin-bottom: 20px;">包含哪些食材？</h3>
+
+                                <div class="card">
+                                    <div
+                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                        <strong>Eggs</strong>
+                                        <span style="color: #ef4444; font-size: 0.8rem;">已排除</span>
+                                    </div>
+                                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                        <button
+                                            style="border: 1px solid #ef4444; background: #fef2f2; color: #ef4444; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">過敏</button>
+                                        <button
+                                            style="border: 1px solid #e2e8f0; background: white; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">純素</button>
+                                        <button
+                                            style="border: 1px solid #e2e8f0; background: white; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">不喜歡</button>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div
+                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                        <strong>Fish</strong>
+                                        <span style="color: #64748b; font-size: 0.8rem;">部分限制</span>
+                                    </div>
+                                    <div style="font-size: 0.8rem; color: #475569;">
+                                        接受：<span
+                                            style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">海魚</span>
+                                        排除：<span
+                                            style="background: #fee2e2; padding: 2px 6px; border-radius: 4px;">貝類</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Language & Measurement -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">System Settings <span class="tag risk-low">隱藏後果</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/13_Settings_Units_Toggle.png" alt="Original Units UI">
+                        </div>
+                        <div class="review-notes">
+                            <strong>發現的問題 (Issues):</strong>
+                            <ul>
+                                <li><strong>隱藏後果 (Hidden Consequence):</strong> 切換單位制觸發全域歷史數據重算，違反 <strong>Visibility of
+                                        System Status</strong> (未提前告知系統狀態的重大變更)。</li>
+                                <li><strong>交互反饋 (Feedback):</strong> 缺乏明確的 Loading 狀態或確認步驟 (Confirmation Dialog)，違反
+                                    <strong>Error Prevention</strong> 原則。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag improvement">預期管理</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-frame"
+                                style="padding: 20px; background: rgba(0,0,0,0.5); justify-content: center;">
+                                <div style="background: white; border-radius: 12px; padding: 20px;">
+                                    <h4 style="margin-top: 0;">切換至英制單位 (Imperial)？</h4>
+                                    <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 20px;">
+                                        這將重新計算您所有的歷史體重與飲食記錄。您的數據不會遺失，但數值顯示將會改變。
+                                    </p>
+                                    <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                                        <button class="btn-ghost">取消</button>
+                                        <button class="btn-primary">確認切換</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Community -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">Settings (Community) <span class="tag risk-low">情境推廣</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/13_Settings_02_Main_Links.png" alt="Original Setting Links">
+                        </div>
+                        <div class="review-notes">
+                            <strong>發現的問題：</strong>
+                            <ul>
+                                <li><strong>社交壓力 (Social Pressure)：</strong>在設定選單中過度強調社群媒體連結 (TikTok/IG)，暗示使用者「應該」關注。
+                                </li>
+                                <li><strong>情境不當：</strong>干擾了設定頁面的主要功能（個人化與隱私管理）。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag improvement">專注功能</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-frame" style="padding: 20px;">
+                                <h3 style="margin-bottom: 20px;">Settings</h3>
+                                <div class="card" style="padding: 15px; display: flex; justify-content: space-between;">
+                                    <span>👤 My Profile</span>
+                                    <span>></span>
+                                </div>
+                                <div class="card" style="padding: 15px; display: flex; justify-content: space-between;">
+                                    <span>🔔 Notifications</span>
+                                    <span>></span>
+                                </div>
+                                <div class="card" style="padding: 15px; display: flex; justify-content: space-between;">
+                                    <span>🔒 Privacy & Security</span>
+                                    <span>></span>
+                                </div>
+
+                                <div style="margin-top: 40px; text-align: center;">
+                                    <a href="#" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">Join
+                                        our Community ></a>
+                                    <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 5px;">
+                                        Connect with others on Discord & Instagram
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Sunk Cost (Onboarding) -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">原始設計 <span class="tag risk-high">沈沒成本謬誤</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/01_Goals_08_Personalizing_Loader.png" alt="Onboarding Loader">
+                        </div>
+                        <div class="review-notes">
+                            <div class="note-item">
+                                <div class="note-title">🚫 登門檻效應 (Foot-in-the-door)</div>
+                                <p>利用長達 5 分鐘的問卷 (Micro-commitments) 讓用戶在心理上無法放棄，是典型的 <strong>Sunk Cost Fallacy
+                                        (沈沒成本謬誤)</strong> 應用。</p>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-title">⚠️ 投資壓力 (Investment Pressure)</div>
+                                <p>Loader 動畫強調 "Personalizing..." 實際上是在掩蓋後端的付費牆載入，製造 "產品已為我付出努力" 的假象 (Reciprocity
+                                    Principle 的扭曲使用)。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag risk-safe">透明化流程</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mock-card">
+                                <div style="text-align: center; padding: 2rem;">
+                                    <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem;">Your plan is
+                                        ready!</div>
+                                    <div style="color: #64748b; margin-bottom: 2rem;">
+                                        Based on your answers, we've crafted a plan for you.
+                                    </div>
+                                    <div class="btn-primary" style="margin-bottom: 1rem;">View My Plan (Free Preview)
+                                    </div>
+                                    <div style="color: #6366f1; font-size: 0.9rem; cursor: pointer;">Save progress &
+                                        continue later</div>
+                                </div>
+                            </div>
+                            <div class="review-notes">
+                                <div class="note-item">
+                                    <div class="note-title">✅ Clear Upfront Value</div>
+                                    <p>提供免費預覽或明確的「稍後繼續」選項，不利用沈沒成本施壓。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Sunk Cost (Fasting Warning) -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">原始設計 <span class="tag risk-med">情緒勒索</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/03_Fast_Cancel_01_OhOm.png" alt="Fasting Warning">
+                        </div>
+                        <div class="review-notes">
+                            <div class="note-item">
+                                <div class="note-title">🚫 情緒勒索 (Guilt Tripping)</div>
+                                <p>文案 "Less than 12h isn't enough" 直接否定用戶努力，觸發負面情緒。這違反了 <strong>Positive Reinforcement
+                                        (正向增強)</strong> 的行為設計原則。</p>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-title">⚠️ 忽視生理需求</div>
+                                <p>強迫用戶為了數據完整性而忍受生理不適，違反 <strong>Maslow's Hierarchy of Needs</strong> (生理需求高於自我實現需求)。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag risk-safe">尊重與支持</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mock-card">
+                                <div style="padding: 1.5rem;">
+                                    <div style="font-weight: bold; margin-bottom: 1rem;">End fast early?</div>
+                                    <div style="color: #64748b; margin-bottom: 1.5rem; line-height: 1.5;">
+                                        You've fasted for 8h 30m. Listen to your body! You can always start again
+                                        uniquely.
+                                    </div>
+                                    <div style="display: flex; gap: 10px;">
+                                        <div class="btn-primary" style="background: #ef4444; border: none;">End Fast
+                                        </div>
+                                        <div class="btn-primary"
+                                            style="background: white; color: #1e293b; border: 1px solid #cbd5e1;">Keep
+                                            Going</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-notes">
+                                <div class="note-item">
+                                    <div class="note-title">✅ Neutral Support</div>
+                                    <p>給予中性反饋，鼓勵用戶傾聽身體聲音，而非單純追求數據。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: False Urgency (One-time Offer) -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">原始設計 <span class="tag risk-med">虛假急迫性</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/01_Sub_02_OneTimeOffer.png" alt="One-time Offer">
+                        </div>
+                        <div class="review-notes">
+                            <div class="note-item">
+                                <div class="note-title">🚫 稀缺性操控 (Manufactured Scarcity)</div>
+                                <p>"One-time offer" 若非真實限制，則屬欺騙。濫用 <strong>Scarcity Principle (稀缺性原則)</strong>
+                                    會導致長期信任崩盤。</p>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-title">⚠️ 損失厭惡 (Loss Aversion)</div>
+                                <p>按鈕文案 "Skip this offer forever" 強調永久失去，刻意觸發用戶的損失厭惡心理，而非基於價值的決策。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag risk-safe">真實誠信</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mock-card">
+                                <div style="padding: 1.5rem; text-align: center;">
+                                    <div style="font-weight: bold; font-size: 1.2rem; color: #1e293b;">Special Welcome
+                                        Offer</div>
+                                    <div style="color: #64748b; margin: 1rem 0;">
+                                        Get 50% off your first year. Valid for the next 48 hours.
+                                    </div>
+                                    <div class="btn-primary">Claim Offer ($49.99)</div>
+                                    <div
+                                        style="margin-top: 1rem; color: #64748b; text-decoration: underline; cursor: pointer;">
+                                        No thanks, maybe later</div>
+                                </div>
+                            </div>
+                            <div class="review-notes">
+                                <div class="note-item">
+                                    <div class="note-title">✅ Honest Scarcity</div>
+                                    <p>若有期限應明確標示（如 48小時），並提供中性的拒絕選項。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Visual Interference (Subscription) -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">原始設計 <span class="tag risk-high">視覺干擾</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/01_Sub_01_Trial.png" alt="Subscription Page">
+                        </div>
+                        <div class="review-notes">
+                            <div class="note-item">
+                                <div class="note-title">🚫 捕鼠夾變體 (Roach Motel Variant)</div>
+                                <p>利用 <strong>Gestalt Principle of Proximity (接近性原則)</strong> 的反向操作，將價格資訊遠離 "Start Free
+                                    Trial" 主按鈕，降低用戶對費用的感知。</p>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-title">⚠️ 隱藏成本</div>
+                                <p>極低對比度 (Low Contrast) 的灰色小字違反 <strong>Web Content Accessibility Guidelines
+                                        (WCAG)</strong>，蓄意讓用戶忽略續訂條款。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag risk-safe">費用透明</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mock-card">
+                                <div style="padding: 1.5rem;">
+                                    <div style="font-weight: bold; margin-bottom: 1rem;">Start your journey</div>
+                                    <div class="settings-group"
+                                        style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                        <div
+                                            style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span>7-Day Free Trial</span>
+                                            <span style="font-weight: bold;">$0.00</span>
+                                        </div>
+                                        <div
+                                            style="display: flex; justify-content: space-between; color: #64748b; font-size: 0.9rem;">
+                                            <span>Then yearly billing</span>
+                                            <span>$49.99/year</span>
+                                        </div>
+                                    </div>
+                                    <div class="btn-primary">Start Free Trial</div>
+                                    <div
+                                        style="text-align: center; font-size: 0.8rem; color: #64748b; margin-top: 0.5rem;">
+                                        You won't be charged until Dec 27. Cancel anytime.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-notes">
+                                <div class="note-item">
+                                    <div class="note-title">✅ Clear Cost Breakdown</div>
+                                    <p>在按鈕上方明確列出試用期、續訂價格與扣款時間點。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: False Expectations (Weight) -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">原始設計 <span class="tag risk-low">錯誤預期</span></div>
+                        </div>
+                        <div class="image-container">
+                            <img src="All_screen_shots/01_Goals_09_Projection_Graph.png" alt="Weight Projection">
+                        </div>
+                        <div class="review-notes">
+                            <div class="note-item">
+                                <div class="note-title">🚫 Oversimplified Graph</div>
+                                <p>展示平滑線性的體重下降曲線，誤導用戶以為減重是線性過程。</p>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-title">⚠️ Unrealistic Precision</div>
+                                <p>"Reach 62kg by Jan 28" 過於絕對，即使是預測也應保留變動空間。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">優化提案 <span class="tag risk-safe">合理預期</span></div>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mock-card">
+                                <div style="padding: 1.5rem; text-align: center;">
+                                    <div style="font-weight: bold; margin-bottom: 0.5rem;">Estimated Progress</div>
+                                    <div
+                                        style="height: 100px; background: #f1f5f9; border-radius: 8px; margin: 1rem 0; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+                                        [Graph showing a range/zone area instead of single line]
+                                    </div>
+                                    <div style="font-size: 0.9rem; color: #64748b;">
+                                        You could reach your goal between <strong>Jan 20 - Feb 15</strong>.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-notes">
+                                <div class="note-item">
+                                    <div class="note-title">✅ Range Projection</div>
+                                    <p>使用區間預測而非單一日期，並展示波動的可能性範圍。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Conclusion & Risk Matrix -->
+            <div class="slide">
+                <div class="content-wrapper">
+                    <!-- Left Panel: Risk Matrix Table -->
+                    <div class="panel" style="flex: 1.2;">
+                        <div class="panel-header">
+                            <div class="panel-title">總結與風險等級矩陣 (Risk Matrix)</div>
+                        </div>
+                        <div class="review-notes" style="padding: 1.5rem;">
+                            <style>
+                                .risk-table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                    margin-top: 0.5rem;
+                                    font-size: 0.85rem;
+                                }
+
+                                .risk-table th,
+                                .risk-table td {
+                                    padding: 0.75rem;
+                                    text-align: left;
+                                    border-bottom: 1px solid #e2e8f0;
+                                }
+
+                                .risk-table th {
+                                    background: #f8fafc;
+                                    color: #64748b;
+                                    font-weight: 600;
+                                    position: sticky;
+                                    top: 0;
+                                }
+
+                                .risk-table tr:hover {
+                                    background: #fdfdfd;
+                                }
+
+                                .article-content {
+                                    font-size: 0.95rem;
+                                    line-height: 1.6;
+                                    color: #334155;
+                                }
+
+                                .article-content h3 {
+                                    font-size: 1.1rem;
+                                    color: #1e293b;
+                                    margin-top: 1.5rem;
+                                    margin-bottom: 0.75rem;
+                                    font-weight: 600;
+                                }
+
+                                .article-content p {
+                                    margin-bottom: 1rem;
+                                }
+
+                                .article-content blockquote {
+                                    border-left: 4px solid #6366f1;
+                                    padding-left: 1rem;
+                                    margin: 1.5rem 0;
+                                    color: #475569;
+                                    background: #f1f5f9;
+                                    padding: 1rem;
+                                    border-radius: 0 8px 8px 0;
+                                }
+
+                                .highlight-box {
+                                    background: #fff1f2;
+                                    border: 1px solid #fecdd3;
+                                    padding: 1rem;
+                                    border-radius: 8px;
+                                    margin-top: 1rem;
+                                }
+                            </style>
+                            <div style="overflow-y: auto; max-height: calc(100vh - 250px);">
+                                <table class="risk-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 15%">Flow</th>
+                                            <th style="width: 25%">Dark Pattern</th>
+                                            <th style="width: 15%">Risk Level</th>
+                                            <th style="width: 45%">User Impact</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Onboarding</td>
+                                            <td>Sunk Cost Fallacy</td>
+                                            <td><span class="tag risk-high">High</span></td>
+                                            <td>利用長問卷製造投資感，強迫進入付費牆。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Subscription</td>
+                                            <td>Visual Interference</td>
+                                            <td><span class="tag risk-high">High</span></td>
+                                            <td>隱藏訂閱條款與自動續費資訊，導致意外扣款。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Subscription</td>
+                                            <td>Roach Motel</td>
+                                            <td><span class="tag risk-high">High</span></td>
+                                            <td>訂閱容易，但取消流程極度隱密且困難。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Settings</td>
+                                            <td>Confirmshaming</td>
+                                            <td><span class="tag risk-med">Medium</span></td>
+                                            <td>使用情感勒索文案阻礙用戶取消或退出。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Settings</td>
+                                            <td>Data Hostage</td>
+                                            <td><span class="tag risk-med">Medium</span></td>
+                                            <td>無資料匯出功能，綁架用戶無法轉移平台。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Settings</td>
+                                            <td>False Urgency</td>
+                                            <td><span class="tag risk-med">Medium</span></td>
+                                            <td>創造虛假的 "Forever" 放棄警告，引發焦慮。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tracking</td>
+                                            <td>Forced Precision</td>
+                                            <td><span class="tag risk-low">Low</span></td>
+                                            <td>要求無意義的精確數值 (100%)，增加操作挫折。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Home</td>
+                                            <td>Narrow Framing</td>
+                                            <td><span class="tag risk-low">Low</span></td>
+                                            <td>限制飲食選擇觀點，忽略真實生活的彈性需求。</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Analysis Article -->
+                    <div class="panel" style="flex: 1; overflow-y: auto;">
+                        <div class="panel-header">
+                            <div class="panel-title">深度分析報告 (Analysis)</div>
+                        </div>
+                        <div class="review-notes article-content" style="padding: 2rem;">
+                            <h3>深度分析：可愛包裝下的暗黑模式</h3>
+                            <p>BitePal 最值得探討的 UX 策略在於它如何將「暗黑模式」隱藏在「可愛設計」之下，我們稱之為 <strong>「穿著布偶裝的推銷員」(The Salesman in a
+                                    Mascot Suit)</strong> 策略。</p>
+
+                            <blockquote>
+                                "因為浣熊角色 (Caramel) 很可愛、會互動，用戶會降低戒心，從而更容易接受那些具備侵略性的推銷或情緒勒索。這利用了人類對可愛事物的本能反應來達成商業轉化。"
+                            </blockquote>
+
+                            <h3>主要手法解析</h3>
+
+                            <p><strong>1. Confirmshaming (確認羞辱)</strong><br>
+                                透過羞辱用戶或引發罪惡感來阻止他們拒絕。例如登出時的 "Caramel will miss you a lot"，將單純的功能性動作轉化為「拋棄寵物」的情感負擔。</p>
+
+                            <p><strong>2. Sunk Cost Fallacy (沈沒成本)</strong><br>
+                                利用漫長的 Onboarding 問卷作為「入會門檻」。當用戶花費時間回答隱私問題後，心理上已產生投資，此時展示付費牆，付費意願會大幅提升。</p>
+
+                            <p><strong>3. Visual Interference (視覺干擾)</strong><br>
+                                這是常見的「捕鼠夾」變體。訂閱頁面中，巨大的 "Start 3-day free trial" 按鈕吸引點擊，而高額年費與自動續訂條款則隱藏在極小的灰色字體中。</p>
+
+                            <div class="highlight-box">
+                                <strong style="color: #be123c;">總結建議：</strong><br>
+                                雖然可愛風格能提升黏著度，但不應作為掩蓋操控性設計的工具。建議優先處理標示為 <span class="tag risk-high">High</span>
+                                的風險項目，以符合數位產品設計的道德標準與合規要求。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebars()"></div>
+
+    <!-- Navigation Sidebar -->
+    <div class="sidebar" id="navSidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">目錄 (Index)</div>
+            <button class="close-btn" onclick="closeSidebars()">×</button>
+        </div>
+        <ul class="nav-list" id="navList">
+            <!-- Populated by JS -->
+        </ul>
+    </div>
+
+    <!-- Lexicon Sidebar -->
+    <div class="sidebar" id="lexiconSidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">暗黑模式辭典 (Lexicon)</div>
+            <button class="close-btn" onclick="closeSidebars()">×</button>
+        </div>
+
+        <div class="lexicon-section">
+            <div style="font-size: 0.85rem; color: #64748b; margin-bottom: 1.5rem;">
+                本審查中使用的設計倫理術語與定義。
+            </div>
+
+            <div class="lexicon-category">Product Compliance (產品合規)</div>
+            <div class="lexicon-item"><strong>GDPR</strong><span>General Data Protection Regulation (歐盟通用資料保護規則) - Art.
+                    20 Portability</span></div>
+            <div class="lexicon-item"><strong>ROSCA</strong><span>Restore Online Shoppers' Confidence Act
+                    (恢復線上購物者信心法案)</span></div>
+            <div class="lexicon-item"><strong>FTC Act</strong><span>Federal Trade Commission Act (聯邦貿易委員會法) - Deceptive
+                    Practices</span></div>
+
+            <div class="lexicon-category">Data Governance (數據治理)</div>
+            <div class="lexicon-item"><strong>Trustworthy AI</strong><span>可信賴 AI (AIGP Core)</span></div>
+            <div class="lexicon-item"><strong>User Autonomy</strong><span>用戶自主權 (Human-Centric)</span></div>
+            <div class="lexicon-item"><strong>Transparency</strong><span>透明度 (Know what is happening)</span></div>
+            <div class="lexicon-item"><strong>Accountability</strong><span>問責性 (Justify system decisions)</span></div>
+            <div class="lexicon-item"><strong>Privacy-Enhanced</strong><span>隱私強化 (Data minimization & control)</span>
+            </div>
+
+            <div class="lexicon-category">Quality & Risk Control (品質風控)</div>
+            <div class="lexicon-item"><strong>Dark Pattern</strong><span>暗黑模式 (Deceptive Design)</span></div>
+            <div class="lexicon-item"><strong>Confirmshaming</strong><span>確認羞辱 (Emotional Manipulation)</span></div>
+            <div class="lexicon-item"><strong>Data Hostage</strong><span>資料綁架 (Preventing Export)</span></div>
+            <div class="lexicon-item"><strong>Forced Precision</strong><span>強迫精確 (False Rigidity)</span></div>
+            <div class="lexicon-item"><strong>Visual Interference</strong><span>視覺干擾 (Hiding Information)</span></div>
+            <div class="lexicon-item"><strong>Sunk Cost</strong><span>沈沒成本 (Forced Continuity)</span></div>
+            <div class="lexicon-item"><strong>False Urgency</strong><span>虛假急迫 (Fake Scarcity)</span></div>
+            <div class="lexicon-item"><strong>Narrow Framing</strong><span>框架窄化 (Limited Choices)</span></div>
+            <div class="lexicon-item"><strong>Hidden Consequence</strong><span>隱藏後果 (Unforeseen Effects)</span></div>
+            <div class="lexicon-item"><strong>Social Pressure</strong><span>社群壓力 (Manufactured Envy)</span></div>
+        </div>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab-container">
+        <div class="fab" onclick="toggleLexicon()">
+            📖
+            <div class="fab-tooltip">暗黑模式辭典</div>
+        </div>
+        <div class="fab" onclick="toggleNav()">
+            ☰
+            <div class="fab-tooltip">目錄導覽</div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const indicator = document.getElementById('slideIndicator');
+        const totalSlides = slides.length;
+
+        // Populate Navigation
+        const navList = document.getElementById('navList');
+        const slideTitles = [
+            "封面 / 簡介 (Cover / Intro)",
+            "帳號刪除 (Account Deletion)",
+            "登出流程 (Log Out Flow)",
+            "營養素平衡 (Macro Balance)",
+            "飲食偏好 (Eating Preferences)",
+            "語言與單位 (Language & Units)",
+            "社群區塊 (Community Section)",
+            "沈沒成本 - 導覽流程 (Sunk Cost: Onboarding)",
+            "沈沒成本 - 警告 (Sunk Cost: Warning)",
+            "虛假急迫性 - 優惠 (False Urgency: Offer)",
+            "視覺干擾 (Visual Interference)",
+            "錯誤預期 (False Expectations)",
+            "總結與風險矩陣 (Conclusion & Risk Matrix)"
+        ];
+
+        slideTitles.forEach((title, index) => {
+            const li = document.createElement('li');
+            li.className = 'nav-item';
+            li.textContent = title;
+            li.onclick = () => {
+                goToSlide(index);
+                closeSidebars();
+            };
+            navList.appendChild(li);
+        });
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+            indicator.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+            // Update Nav Active State
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach((item, idx) => {
+                if (idx === currentSlide) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlides();
+            } else {
+                // If on last slide, open navigation sidebar
+                toggleNav();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlides();
+        }
+
+        // Sidebar Functions
+        const overlay = document.getElementById('sidebarOverlay');
+        const navSidebar = document.getElementById('navSidebar');
+        const lexiconSidebar = document.getElementById('lexiconSidebar');
+
+        function closeSidebars() {
+            overlay.classList.remove('open');
+            navSidebar.classList.remove('open');
+            lexiconSidebar.classList.remove('open');
+        }
+
+        function toggleNav() {
+            const isOpen = navSidebar.classList.contains('open');
+            closeSidebars(); // Close others first
+            if (!isOpen) {
+                navSidebar.classList.add('open');
+                overlay.classList.add('open');
+            }
+        }
+
+        function toggleLexicon() {
+            const isOpen = lexiconSidebar.classList.contains('open');
+            closeSidebars(); // Close others first
+            if (!isOpen) {
+                lexiconSidebar.classList.add('open');
+                overlay.classList.add('open');
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'Escape') {
+                closeSidebars();
+            }
+        });
+
+        // Initial call
+        updateSlides();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+
+# User specified exclusions
+Skill_reference_Full.md
+Skill_reference.md
+GEO.md
+Agent Skill Usage.md
+MedicalUX.bib
+
+# System files
+.DS_Store

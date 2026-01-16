@@ -10013,4 +10013,827 @@ window.DS_DATA = {
     { "id": 19, "rico_id": "01235", "task": "Map View", "critique": "Location marker pins are too small and lack sufficient contrast against map background.", "category": "color", "severity": "medium", "bounding_box": [0.4, 0.4, 0.6, 0.6], "ratings": { "aesthetics": 6, "usability": 5, "overall": 5.5 } },
     { "id": 20, "rico_id": "12346", "task": "Article Reader", "critique": "Line height is too tight for body text, reducing readability during extended reading.", "category": "typography", "severity": "medium", "bounding_box": [0.05, 0.15, 0.95, 0.85], "ratings": { "aesthetics": 7, "usability": 5, "overall": 6 } }
   ]
+,
+
+    "uicritScreens": [
+  {
+    "rico_id": "30217",
+    "task": "Read the blog post, do like, comment and share the post.",
+    "all_tasks": [
+      "Read the blog post, do like, comment and share the post.",
+      "Read the news published on the blog.",
+      "Manage, Like or Comment a blog post"
+    ],
+    "ratings": {
+      "aesthetics": 3.7,
+      "learnability": 2.0,
+      "efficiency": 2.3,
+      "usability": 4.3,
+      "design_quality": 3.7
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is that text should be easily readable and understandable.\nIn the current design, the text is small and lacks weight, hindering readability.\nTo fix this, increase the text size and weight to enhance readability.",
+        "bounding_box": [
+          0.0122184,
+          0.09450172,
+          0.98663612,
+          0.84536082
+        ],
+        "source": "human",
+        "category": "typography"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to have a well-organized layout with clear information hierarchy, facilitating easy navigation and quick access to desired information.\nIn the current design, the elements are scattered and unorganized, leading to difficulty in locating pertinent information and hindering efficient navigation. \nTo fix this, a redesign should prioritize organizing elements cohesively, implementing a clear information hierarchy, and optimizing whitespace usage for improved visual clarity.",
+        "bounding_box": [
+          0.015273,
+          0.04810997,
+          0.98052692,
+          0.93127148
+        ],
+        "source": "human",
+        "category": "hierarchy"
+      }
+    ]
+  },
+  {
+    "rico_id": "30809",
+    "task": "Search ATM, Airport locations and track it.",
+    "all_tasks": [
+      "Search ATM, Airport locations and track it.",
+      "Select from available options for mobile location tracker map",
+      "View mobile location tracker map options"
+    ],
+    "ratings": {
+      "aesthetics": 3.7,
+      "learnability": 1.7,
+      "efficiency": 1.7,
+      "usability": 3.3,
+      "design_quality": 3.7
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is to have a back icon/button for easy navigation to the previous page.\nIn the current design,  design lacks a back button/icon, hindering navigation to the previous page.\nTo fix this, implement a back icon (arrow left) in the top left corner for intuitive navigation back.",
+        "bounding_box": [
+          0.01832761,
+          0.06024964,
+          0.03685144,
+          0.07917951
+        ],
+        "source": "human",
+        "category": "interaction"
+      },
+      {
+        "text": "Comment 2\n\n\nThe expected standard is that the design should be user-friendly. In the current design, the user is not able to see all of the places  at once. This makes it difficult for the user to find the place they want. To fix this, the designer should add a scroll bar or a way for the user to navigate through the places.",
+        "bounding_box": [
+          0.01832761,
+          0.11683849,
+          0.98052692,
+          0.92955326
+        ],
+        "source": "human",
+        "category": "general"
+      }
+    ]
+  },
+  {
+    "rico_id": "26551",
+    "task": "Click to play/learn the Guitar chord",
+    "all_tasks": [
+      "Click to play/learn the Guitar chord",
+      "Manage the settings for the G - chord"
+    ],
+    "ratings": {
+      "aesthetics": 4.0,
+      "learnability": 2.3,
+      "efficiency": 2.3,
+      "usability": 4.3,
+      "design_quality": 4.0
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is that the text’s visual treatment and formatting should make it easy to understand. In the current design, the text \n(ON) is too small and difficult to read. To fix this, increase font size and weight to make it easier to read.",
+        "bounding_box": [
+          0.6681144,
+          0.03603673,
+          0.71616372,
+          0.05791617
+        ],
+        "source": "human",
+        "category": "typography"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is that the text and background colors used in the design should be complementary and easy to read. In the current design, text (SOUND) is in grey color on black background  which is difficult to read. To fix this, change colors of text and background to be more complementary to each other and make it easier to read.",
+        "bounding_box": [
+          0.56743962,
+          0.03861078,
+          0.66582633,
+          0.0592032
+        ],
+        "source": "human",
+        "category": "color"
+      }
+    ]
+  },
+  {
+    "rico_id": "39384",
+    "task": "Check average consumption of fuel and driving cost.",
+    "all_tasks": [
+      "Check average consumption of fuel and driving cost.",
+      "View the statistics for fuel consumption",
+      "View average consumption of fuel"
+    ],
+    "ratings": {
+      "aesthetics": 4.0,
+      "learnability": 1.7,
+      "efficiency": 2.0,
+      "usability": 3.7,
+      "design_quality": 4.0
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is that text should be larger and have higher contrast for improved readability.\nIn the current design, text is small, gray, and low in contrast with the white background, leading to readability challenges.\nTo fix this, increase the font size and adjust the text color to ensure higher contrast against the background.",
+        "bounding_box": [
+          0.02443681,
+          0.04810997,
+          0.97441772,
+          0.7628866
+        ],
+        "source": "human",
+        "category": "color"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is that each section, such as the header, body, and footer, should feature distinct visual elements, facilitating easy differentiation and enhancing overall user experience.\nIn the current design, the lack of differentiation between the header, body, and footer, all sharing the same color of background, fails to meet the expected standard of clear section distinction for optimal user experience.\nTo fix this, consider implementing contrasting backgrounds or subtle shading techniques for each section—header, body, and footer—to achieve the expected standard of clear visual differentiation and enhance user experience",
+        "bounding_box": [
+          0.02138221,
+          0.0421966,
+          0.98348109,
+          0.92225234
+        ],
+        "source": "human",
+        "category": "color"
+      }
+    ]
+  },
+  {
+    "rico_id": "44024",
+    "task": "Use Current Location or Add a new Location.",
+    "all_tasks": [
+      "Use Current Location or Add a new Location.",
+      "Select or add a location",
+      "Choose a location."
+    ],
+    "ratings": {
+      "aesthetics": 3.7,
+      "learnability": 2.3,
+      "efficiency": 2.0,
+      "usability": 4.3,
+      "design_quality": 4.0
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is to have a back icon (arrow left) for easy navigation to the previous page.\nIn the current design, the design lacks a back icon (arrow left), hindering navigation to the previous page.\nTo fix this, implement a back icon (arrow left) in the top left corner for intuitive navigation back.",
+        "bounding_box": [
+          0.05192822,
+          0.06013746,
+          0.13134784,
+          0.0790378
+        ],
+        "source": "human",
+        "category": "interaction"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to have a clear typographic hierarchy, with larger font size for headers and smaller font size for body content.\nIn the current design,  the header and body content share the same font size, which detracts from visual appeal and hinders content hierarchy. \nTo fix this, adjust the font sizes to create a clear typographic hierarchy: increase the size of headers to visually distinguish them from body content while maintaining readability and aesthetic appeal.",
+        "bounding_box": [
+          0.03665521,
+          0.04982818,
+          0.95914471,
+          0.35738832
+        ],
+        "source": "human",
+        "category": "typography"
+      }
+    ]
+  },
+  {
+    "rico_id": "71747",
+    "task": "Choose option to check for Psychiatric help on Prognosis.",
+    "all_tasks": [
+      "Choose option to check for Psychiatric help on Prognosis.",
+      "Select from options shown for prognosis",
+      "Choose the options for Prognosis on psychiatry"
+    ],
+    "ratings": {
+      "aesthetics": 3.7,
+      "learnability": 3.0,
+      "efficiency": 3.0,
+      "usability": 4.7,
+      "design_quality": 4.0
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is to have  noticeable clickable elements with clear contrast. \nIn the current design, elements on the screen appears non-clickable and seamlessly integrated with the background, giving users the impression that it is merely a static part of the display rather than an interactive component.\nTo fix this,  add a border or make a tile, so it doesn't blend in with the background.",
+        "bounding_box": [
+          0.03970981,
+          0.25302606,
+          0.97424247,
+          0.64540747
+        ],
+        "source": "human",
+        "category": "color"
+      },
+      {
+        "text": "Comment 2\n\nThe expected standard is that text should be clearly readable and  understandable.\nIn the current design, the text is difficult to read due to its small size.\nTo fix this, increase font size and ensure good contrast for readability.",
+        "bounding_box": [
+          0.02138221,
+          0.05670103,
+          0.98660697,
+          0.91573858
+        ],
+        "source": "human",
+        "category": "color"
+      }
+    ]
+  },
+  {
+    "rico_id": "16155",
+    "task": "Check the Weather hourly and wind speed of New York.",
+    "all_tasks": [
+      "Check the Weather hourly and wind speed of New York.",
+      "Monitor the hourly temperature and wind speed in New York.",
+      "Provide weather information for New York"
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 2.7,
+      "efficiency": 2.7,
+      "usability": 4.0,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is for text to have high contrast with the background for optimal readability.\nIn the current design,  the use of a black background with gray text creates a low-contrast scenario. This makes it difficult to read the information on the screen. \nTo fix this, Swap black background for light & use dark text, or keep a dark background but use light colored text for better readability.",
+        "bounding_box": [
+          0.01832761,
+          0.01202749,
+          0.98663612,
+          0.93127148
+        ],
+        "source": "human",
+        "category": "color"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to have clean, organized layouts with prioritized content and clear visual hierarchy. \nIn the current design, design suffers from clutter due to excessive content, improper element arrangement, misalignment, and elements touching the edges. This creates a visually unappealing and overwhelming user experience.\nTo fix this, prioritize content, utilize white space, and establish a grid for a clean look.",
+        "bounding_box": [
+          0.0122184,
+          0.01202749,
+          0.96525391,
+          0.94158076
+        ],
+        "source": "human",
+        "category": "spacing"
+      }
+    ]
+  },
+  {
+    "rico_id": "19267",
+    "task": "Select an option for tatto cam to proceed",
+    "all_tasks": [
+      "Select an option for tatto cam to proceed",
+      "View options on tattoo cam",
+      "View/select category from list"
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 2.3,
+      "efficiency": 2.3,
+      "usability": 4.3,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected  standard is to use legible fonts for all text to ensure readability and user comprehension.\n\nIn the current design, the text on options for tattoos is not readable due to the font choice.\n\nTo fix this, select a legible font that is easy to read, especially for smaller text style.",
+        "bounding_box": [
+          0.09774723,
+          0.07216495,
+          0.9224895,
+          0.86082474
+        ],
+        "source": "human",
+        "category": "typography"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to provide a clear navigation option, such as a back button, to allow users to return to the main screen or previous page.\n\nIn the current design, the layout lacks a back option, which may make it difficult for users to navigate back to the main screen.\n\nTo fix this, add a back button or similar navigation element that allows users to easily return to the main screen from the current page.",
+        "bounding_box": [
+          0.01832761,
+          0.0137457,
+          0.99885452,
+          0.93642612
+        ],
+        "source": "human",
+        "category": "interaction"
+      }
+    ]
+  },
+  {
+    "rico_id": "22172",
+    "task": "Click to make a baby image from an adult image  and Click on the  'Save'  button or click on the 'Menu' button for more features.",
+    "all_tasks": [
+      "Click to make a baby image from an adult image  and Click on the  'Save'  button or click on the 'Menu' button for more features.",
+      "Select the Menu or Save button.",
+      "Make a baby photo with an adult photo."
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 2.0,
+      "efficiency": 2.0,
+      "usability": 4.3,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is to have a back icon (arrow left) for easy navigation to the previous page.\nIn the current design, the design lacks a back icon (arrow left), hindering navigation to the previous page.\nTo fix this, implement a back icon (arrow left) in the top left corner for intuitive navigation back.",
+        "bounding_box": [
+          0.0673785,
+          0.02581748,
+          0.15273005,
+          0.04467354
+        ],
+        "source": "human",
+        "category": "interaction"
+      },
+      {
+        "text": "Comment 2\n\nThe expected standard is to have icons and buttons properly aligned and organized.\nIn the current design,  icons and buttons lack proper alignment, organization, and appear messy and unappealing.\nTo fix this, ensure icons and buttons are aligned properly, organized systematically, and visually appealing. Implement a grid-based layout and prioritize a clear visual hierarchy.",
+        "bounding_box": [
+          0.26880489,
+          0.7371134,
+          0.84306987,
+          0.83333333
+        ],
+        "source": "human",
+        "category": "spacing"
+      }
+    ]
+  },
+  {
+    "rico_id": "25135",
+    "task": "Select an option to play",
+    "all_tasks": [
+      "Select an option to play",
+      "Read the recommended stories and do like, comment.",
+      "Explore the recommended stories."
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 2.3,
+      "efficiency": 2.3,
+      "usability": 4.7,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is that the text’s visual treatment and formatting should make it easy to understand. In the current design, the texts ( By publishing date) are too small and difficult to read. To fix this, increase font size and weight to make it easier to read.",
+        "bounding_box": [
+          0.66353827,
+          0.87389069,
+          0.99073128,
+          0.92408471
+        ],
+        "source": "human",
+        "category": "typography"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is that the design should make the most important information visually dominant. \nIn the current design, the back button size is small.\nTo fix this, increase the back button size to make it visually prominent for the users.",
+        "bounding_box": [
+          0.01601644,
+          0.05276807,
+          0.10753896,
+          0.09652695
+        ],
+        "source": "human",
+        "category": "typography"
+      }
+    ]
+  },
+  {
+    "rico_id": "26679",
+    "task": "Explore the available workout options or Click to More.",
+    "all_tasks": [
+      "Explore the available workout options or Click to More.",
+      "Select from the options or view more",
+      "choose from the given options and get more"
+    ],
+    "ratings": {
+      "aesthetics": 4.0,
+      "learnability": 3.3,
+      "efficiency": 3.0,
+      "usability": 5.0,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is to have a back icon (arrow left) for easy navigation to the previous page.\nIn the current design, design lacks a back icon (arrow left), hindering navigation to the previous page.\nTo fix this, implement a back icon (arrow left) in the top left corner for intuitive navigation back.",
+        "bounding_box": [
+          0.00897868,
+          0.05227074,
+          0.039033,
+          0.07239057
+        ],
+        "source": "human",
+        "category": "interaction"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to have a clear and prominent title in the layout.\nIn the current design, design lacks a title, which hinders the user's understanding of the content.\nTo fix this, simply add a clear and prominent title to the top of the layout, providing immediate context for users.",
+        "bounding_box": [
+          0.27833895,
+          0.03198653,
+          0.72427984,
+          0.04882155
+        ],
+        "source": "human",
+        "category": "typography"
+      }
+    ]
+  },
+  {
+    "rico_id": "28672",
+    "task": "Download videos from the GetVideo",
+    "all_tasks": [
+      "Download videos from the GetVideo",
+      "Tap on the illustration to get video",
+      "Explore GetVideo"
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 2.0,
+      "efficiency": 2.3,
+      "usability": 4.3,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is back button should be included in the layout to provide users with a convenient way to navigate back to the main screen .\nIn the current design, layout lacks a back button, which disrupts the expected navigation flow .\nTo fix this, Incorporate a back button in a prominent and easily accessible location within the layout, typically in the top-left corner .",
+        "bounding_box": [
+          0.02693603,
+          0.03198653,
+          0.68537224,
+          0.12626263
+        ],
+        "source": "human",
+        "category": "interaction"
+      },
+      {
+        "text": "Comment 1\nThe expected standard is that The design should address the design brief and should appropriately communicate the content to its intended audience.\nIn the current design,\nthis design does not convey a clear message. The user needs to keep wondering whether the illustration is only for visual purposes or it is clickable. To fix this, Try consolidating your design to make a single unifying point.",
+        "bounding_box": [
+          0.02394314,
+          0.04882155,
+          0.95173962,
+          0.92255892
+        ],
+        "source": "human",
+        "category": "interaction"
+      }
+    ]
+  },
+  {
+    "rico_id": "3087",
+    "task": "Search the place or login to your account.",
+    "all_tasks": [
+      "Search the place or login to your account.",
+      "Enter the location for Apartment",
+      "Login into your account to search where to live"
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 3.0,
+      "efficiency": 3.0,
+      "usability": 4.7,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is that the design utilizes space efficiently, with minimal irrelevant blank space, for a visually appealing layout.\nIn the current design,  it suffers from excessive irrelevant blank space throughout the layout. This creates a sense of emptiness and reduces the visual appeal of the interface.\nTo fix this,  restructure content or add visuals to eliminate dead space and enhance visual appeal.",
+        "bounding_box": [
+          0.0061092,
+          0.03264605,
+          0.99579992,
+          0.93298969
+        ],
+        "source": "human",
+        "category": "general"
+      },
+      {
+        "text": "Comment 2\n\nThe expected standard is to have high visual emphasis on the search bar.\nIn the current design, the search bar lacks visual contrast hindering user discovery.\nTo fix this, increase the search bar's visual contrast to aid user discovery.",
+        "bounding_box": [
+          0.02138221,
+          0.5137457,
+          0.98358152,
+          0.59450172
+        ],
+        "source": "human",
+        "category": "color"
+      }
+    ]
+  },
+  {
+    "rico_id": "32956",
+    "task": "Explore nearby restaurant",
+    "all_tasks": [
+      "Explore nearby restaurant",
+      "View nearby restaurants",
+      "show the list of Restaurant and bars nearby"
+    ],
+    "ratings": {
+      "aesthetics": 4.0,
+      "learnability": 3.0,
+      "efficiency": 2.7,
+      "usability": 4.3,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is the design should address the design brief and should appropriately communicate the content to its intended audience.\nIn the current design,\nThis design does not convey a clear message , there should be images / content.\nTo fix this, add an image / content.",
+        "bounding_box": [
+          0.00896359,
+          0.32436975,
+          0.98001867,
+          0.46890756
+        ],
+        "source": "human",
+        "category": "general"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is that an uncommon icon would need a relevant heading.\nIn the current design,\nThere is an uncommon icon.\nTo fix this, add a relevant icon or add heading to the current icon.",
+        "bounding_box": [
+          0.68626471,
+          0.05051903,
+          0.77086835,
+          0.09411765
+        ],
+        "source": "human",
+        "category": "interaction"
+      }
+    ]
+  },
+  {
+    "rico_id": "35542",
+    "task": "Library for exercises",
+    "all_tasks": [
+      "Library for exercises",
+      "Select from the library exercises",
+      "Select option from the list of exercises"
+    ],
+    "ratings": {
+      "aesthetics": 4.0,
+      "learnability": 2.3,
+      "efficiency": 2.3,
+      "usability": 4.7,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is for information to be presented in a way that is easy to scan and understand.\n\nIn the current design, all of the exercise names are listed together in a single column with no Unterscheidung  between the muscle groups. This can make it difficult for users to quickly find the exercises they are looking for.\n\nTo fix this, the exercise list could be reorganized into sections based on the muscle group that the exercise targets. For example, there could be sections for arms, shoulders, chest, back, legs, buttocks, and abdomen. Each section header could be visually distinct from the exercise names, perhaps using a bold font or a different color.",
+        "bounding_box": [
+          0.01792717,
+          0.06218487,
+          1.0,
+          0.53781513
+        ],
+        "source": "human",
+        "category": "color"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to provide detailed and descriptive headings that accurately convey the content or purpose of the section.\n\nIn the current design, there is a lack of detailed headings, which may leave users unclear about the content or context of the section.\n\nTo fix this, incorporate detailed headings that clearly describe the content or purpose of each section.",
+        "bounding_box": [
+          0.1015873,
+          0.02016807,
+          0.44817927,
+          0.08403361
+        ],
+        "source": "human",
+        "category": "typography"
+      }
+    ]
+  },
+  {
+    "rico_id": "36636",
+    "task": "Click on the 'Start' button to Track Labor Contraction time.",
+    "all_tasks": [
+      "Click on the 'Start' button to Track Labor Contraction time.",
+      "Track and explore contractions",
+      "Start the timer and track the contractions"
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 2.7,
+      "efficiency": 2.3,
+      "usability": 5.0,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is that text should be sufficiently sized and contrasted with the background for optimal readability.\nIn the current design, the text is too small and lacks contrast with the background, which hinders readability.\nTo fix this, the text size should be increased, and the contrast between the text and background should be enhanced.",
+        "bounding_box": [
+          0.0061092,
+          0.09278351,
+          0.98663612,
+          0.93127148
+        ],
+        "source": "human",
+        "category": "color"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to have a noticeable clickable element with clear contrast. \nIn the current design, the element on the screen appears non-clickable and seamlessly integrated with the background, giving users the impression that it is merely a static part of the display rather than an interactive component.\nTo fix this,  add a border or make a tile, so it doesn't blend in with the background.",
+        "bounding_box": [
+          0.80336006,
+          0.04295533,
+          0.99274532,
+          0.09278351
+        ],
+        "source": "human",
+        "category": "color"
+      }
+    ]
+  },
+  {
+    "rico_id": "44465",
+    "task": "Select to explore food",
+    "all_tasks": [
+      "Select to explore food",
+      "Select any option to know more",
+      "Checkout the culinary recipe for baked items"
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 3.0,
+      "efficiency": 2.7,
+      "usability": 4.3,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is to include descriptive headings within interfaces to provide users with clear context and improve overall navigation.\n\nIn the current design, the absence of a heading leaves users without a clear understanding of the layout's purpose or content.\nTo fix this,add a descriptive heading that succinctly describes the layout and its purpose.",
+        "bounding_box": [
+          0.00298786,
+          0.03529412,
+          0.50196078,
+          0.06218487
+        ],
+        "source": "human",
+        "category": "typography"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to include essential navigation elements such as a back button within interfaces to facilitate smooth user navigation and improve overall usability.\n\nIn the current design, the absence of a back button hinders users' ability to navigate to the previous screen effectively.To fix this,consider adding a back button to the top-left corner of the screen, a common location for navigation controls.",
+        "bounding_box": [
+          0.00896359,
+          0.03361345,
+          0.1254902,
+          0.06218487
+        ],
+        "source": "human",
+        "category": "interaction"
+      }
+    ]
+  },
+  {
+    "rico_id": "51728",
+    "task": "Enter details to retry login or create an account to access My iTriage.",
+    "all_tasks": [
+      "Enter details to retry login or create an account to access My iTriage.",
+      "Enter the login details or create a new account to access My iTriangle.",
+      "login to \" iTriage\" or create an account."
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 2.0,
+      "efficiency": 2.3,
+      "usability": 4.3,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\n\nThe expected standard is to have high contrast and clear readability.\nIn the current design, design utilizes small gray text, lack of contrast between the gray text and the background color further reduces readability and creates accessibility concerns.\nTo fix this, Increase the font size of the gray text to improve legibility, Implement a color scheme with higher contrast between the gray text and the background.",
+        "bounding_box": [
+          0.0061092,
+          0.03780069,
+          0.96525391,
+          0.65979381
+        ],
+        "source": "human",
+        "category": "color"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to have a clear and consistent location for the three-dot icon within the layout.\nIn the current design, the three-dot icon, which typically signifies a menu or additional options, is positioned incorrectly within the layout. This misplaced icon could lead to confusion for users as it disrupts the expected visual hierarchy and might not be easily identifiable as an interactive element.\nTo fix this, the three-dot icon should be relocated to a more intuitive and consistent location within the layout.",
+        "bounding_box": [
+          0.9163803,
+          0.94501718,
+          0.97747232,
+          0.99140893
+        ],
+        "source": "human",
+        "category": "spacing"
+      }
+    ]
+  },
+  {
+    "rico_id": "6899",
+    "task": "Choose a theme, adjust( toggle) location and check location update frequency.",
+    "all_tasks": [
+      "Choose a theme, adjust( toggle) location and check location update frequency.",
+      "Manage the settings options.",
+      "View/Manage Settings"
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 2.3,
+      "efficiency": 2.7,
+      "usability": 4.7,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is to have  clear and complete elements presentation.\nIn the current design,   elements are too close to the bottom edge of the layout, causing it to be cut off. This creates an unprofessional and unfinished look, and users may miss important information.\nTo fix this, increase the padding between the bottom of the  elements  and the layout edge.",
+        "bounding_box": [
+          0.06109202,
+          0.90549828,
+          0.9377625,
+          0.93814433
+        ],
+        "source": "human",
+        "category": "spacing"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is to have the Hamburger icon aligned with other elements and fully visible within the layout.\nIn the current design, the Hamburger icon is misaligned and partially cut off. \nTo fix this, Adjust padding or use Flex box/Grid to align and prevent cutoff.",
+        "bounding_box": [
+          0.0061092,
+          0.04820444,
+          0.05803742,
+          0.09621993
+        ],
+        "source": "human",
+        "category": "spacing"
+      }
+    ]
+  },
+  {
+    "rico_id": "70172",
+    "task": "Review your likes.",
+    "all_tasks": [
+      "Review your likes.",
+      "Check number of likes or Click on 'Play Match now' button.",
+      "View notifications along with likes and glances"
+    ],
+    "ratings": {
+      "aesthetics": 4.3,
+      "learnability": 2.3,
+      "efficiency": 2.0,
+      "usability": 4.3,
+      "design_quality": 4.3
+    },
+    "severity": "high",
+    "critiques": [
+      {
+        "text": "Comment 1\nThe expected standard is for design elements to have a comfortable amount of space around it for clarity. In the current design, the lack of margin between the text and the edge of the design is awkward. To fix this, consider increasing the right margin around the text.",
+        "bounding_box": [
+          0.8172482,
+          0.05516414,
+          0.97575189,
+          0.09058781
+        ],
+        "source": "human",
+        "category": "typography"
+      },
+      {
+        "text": "Comment 2\nThe expected standard is that the text should be easy to read and respect rules of typography. In the current design, the text is difficult to read because there is not enough contrast between the text and the background. To fix this,  use a darker color for the text.",
+        "bounding_box": [
+          0.19262416,
+          0.34103644,
+          0.83996765,
+          0.38188977
+        ],
+        "source": "human",
+        "category": "color"
+      }
+    ]
+  }
+]
 };

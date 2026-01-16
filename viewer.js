@@ -1873,7 +1873,15 @@ async function loadCritiques() {
     }
 
     // Fallback to embedded data from DS_DATA (for file:// protocol)
-    if (window.DS_DATA && window.DS_DATA.critiques) {
+    if (window.DS_DATA && window.DS_DATA.uicritScreens) {
+        // Use the new UICrit screens format
+        uicritScreensData = window.DS_DATA.uicritScreens;
+        renderUICritScreens(uicritScreensData);
+        initCritiqueFilters();
+        updateCritiqueCounts();
+        console.log('Loaded UICrit from embedded DS_DATA.uicritScreens');
+    } else if (window.DS_DATA && window.DS_DATA.critiques) {
+        // Legacy format fallback
         critiquesData = window.DS_DATA.critiques;
         renderCritiquesLegacy(critiquesData);
         initCritiqueFilters();

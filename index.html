@@ -325,6 +325,28 @@
                     </div>
                 </div>
 
+                <!-- UICrit Design Critique Library -->
+                <div class="critique-library-section">
+                    <h3>📝 設計評論庫 (Design Critique Library)</h3>
+                    <p class="section-desc">基於 UICrit 方法論，由專業設計師標註的 UI 評論範例。篩選分類查看細節。</p>
+
+                    <!-- Category Filter -->
+                    <div class="critique-filter-bar">
+                        <button class="critique-filter-btn active" data-filter="all">全部 (All)</button>
+                        <button class="critique-filter-btn" data-filter="accessibility">♿ 無障礙</button>
+                        <button class="critique-filter-btn" data-filter="typography">🔤 排版</button>
+                        <button class="critique-filter-btn" data-filter="color">🎨 色彩</button>
+                        <button class="critique-filter-btn" data-filter="spacing">📐 間距</button>
+                        <button class="critique-filter-btn" data-filter="interaction">👆 互動</button>
+                        <button class="critique-filter-btn" data-filter="hierarchy">📊 層級</button>
+                    </div>
+
+                    <!-- Critiques Grid -->
+                    <div id="critiques-grid" class="critiques-grid">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
                 <!-- Dark Pattern Annotated Cases Section -->
                 <div class="dark-pattern-annotated-section">
                     <h3>🔍 Dark Pattern 標註案例庫 (Annotated Dark Pattern Cases)</h3>
@@ -637,270 +659,581 @@
         <!-- Standard Guidelines Filter -->
 
         <div id="generator-tab" class="tab-content">
-            <div class="generator-container">
-                <div class="generator-header">
-                    <h2>🧠 UX Agent 技能庫</h2>
-                    <p class="subtitle">來自 skills.rest 的精選技能與核心能力 <span class="en">(Curated Skills from skills.rest &
-                            Core Competencies)</span></p>
-                </div>
-
-                <div class="skill-cards-container">
-
-                    <!-- Category: UX/UI Design -->
-                    <div class="skill-category-group">
-                        <h3>🎨 UX/UI 設計技能 <span
-                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(UX/UI Design
-                                Skills)</span></h3>
-                        <div class="skill-grid">
-                            <div class="skill-card">
-                                <h4>ui-ux-pro-max</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>快速設計精美的 UI/UX。規劃與實作使用者介面。<br><span class="en">Design stunning UI/UX fast. Plan and
-                                        implement UI.</span></p>
-                                <a href="https://skills.rest/skill/ui-ux-pro-max" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>frontend-design</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>製作具有獨特風格的生產級 UI (nbarthelemy)。<br><span class="en">Unique style production-ready
-                                        UI.</span></p>
-                                <a href="https://skills.rest/skill/frontend-design" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>figma-analyzer</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>透過 API 從 Figma 提取設計資源。<br><span class="en">Extract design assets from Figma via
-                                        API.</span></p>
-                                <a href="https://skills.rest/skill/figma-analyzer" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>design-system</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>簡化設計 Token 與 UI 架構。<br><span class="en">Streamline design tokens and UI
-                                        architecture.</span></p>
-                                <a href="https://skills.rest/skill/design-system" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>unsplash-image-finder</h4>
-                                <span class="skill-tag">官方 Official</span>
-                                <p>即時獲取完美的 Unsplash 圖片。<br><span class="en">Instantly fetch perfect Unsplash
-                                        images.</span></p>
-                                <a href="https://skills.rest/skill/unsplash-image-finder" target="_blank">查看技能 View
-                                    Skill</a>
-                            </div>
-                        </div>
+            <div class="skills-layout">
+                <!-- Left Sidebar -->
+                <aside class="skills-sidebar">
+                    <!-- Browse by Category -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path
+                                    d="M2 4a1 1 0 011-1h10a1 1 0 011 1v1a1 1 0 01-1 1H3a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h10a1 1 0 011 1v1a1 1 0 01-1 1H3a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h10a1 1 0 011 1v1a1 1 0 01-1 1H3a1 1 0 01-1-1v-1z" />
+                            </svg>
+                            按分類瀏覽 Browse by Category
+                        </h3>
+                        <ul class="category-list">
+                            <li class="category-item active" data-category="all">
+                                <span class="category-name">全部技能 All Skills</span>
+                                <span class="category-count">24</span>
+                            </li>
+                            <li class="category-item" data-category="ux-writer">
+                                <span class="category-name">✍️ UX Writer</span>
+                                <span class="category-count">4</span>
+                            </li>
+                            <li class="category-item" data-category="product-designer">
+                                <span class="category-name">📦 Product Designer</span>
+                                <span class="category-count">4</span>
+                            </li>
+                            <li class="category-item" data-category="user-researcher">
+                                <span class="category-name">🔬 User Researcher</span>
+                                <span class="category-count">2</span>
+                            </li>
+                            <li class="category-item" data-category="interaction-designer">
+                                <span class="category-name">🎬 Interaction Designer</span>
+                                <span class="category-count">5</span>
+                            </li>
+                            <li class="category-item" data-category="ui-designer">
+                                <span class="category-name">🎨 UI Designer</span>
+                                <span class="category-count">7</span>
+                            </li>
+                            <li class="category-item" data-category="ux-architect">
+                                <span class="category-name">🏗️ UX Architect</span>
+                                <span class="category-count">5</span>
+                            </li>
+                            <li class="category-item" data-category="other">
+                                <span class="category-name">🔧 其它 Others</span>
+                                <span class="category-count">7</span>
+                            </li>
+                        </ul>
                     </div>
 
-                    <!-- Category: CSS & Animation (New) -->
-                    <div class="skill-category-group">
-                        <h3>💅 CSS 與動畫技能 <span
-                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(CSS &
-                                Animation)</span></h3>
-                        <div class="skill-grid">
-                            <div class="skill-card">
-                                <h4>css</h4>
-                                <span class="skill-tag">社群 Community</span>
-                                <p>製作可擴展、響應式的 CSS 模式。<br><span class="en">Scalable, responsive CSS patterns.</span></p>
-                                <a href="https://skills.rest/skill/css" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>tailwind</h4>
-                                <span class="skill-tag">社群 Community</span>
-                                <p>使用 Tailwind 打造可擴展 UI。<br><span class="en">Scalable UI with Tailwind.</span></p>
-                                <a href="https://skills.rest/skill/tailwind" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>gsap</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>製作高性能 GSAP 動畫。<br><span class="en">High-performance GSAP animations.</span></p>
-                                <a href="https://skills.rest/skill/gsap" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>coverflow</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>安全旋轉的 3D coverflow 輪播。<br><span class="en">Secure rotatable 3D coverflow
-                                        carousel.</span></p>
-                                <a href="https://skills.rest/skill/coverflow" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>canvas-effects</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>製作高性能 Canvas 視覺效果。<br><span class="en">High-performance Canvas visual effects.</span>
-                                </p>
-                                <a href="https://skills.rest/skill/canvas-effects" target="_blank">查看技能 View Skill</a>
-                            </div>
+                    <!-- Popular Tags -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path
+                                    d="M2 2a2 2 0 012-2h4.586a1 1 0 01.707.293l5.414 5.414a1 1 0 010 1.414l-4.586 4.586a1 1 0 01-1.414 0L3.293 6.293A1 1 0 013 5.586V4a2 2 0 01-2-2zm3.5 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                            </svg>
+                            熱門標籤 Popular Tags
+                        </h3>
+                        <div class="tags-cloud">
+                            <span class="tag-badge" data-tag="advanced">進階 Advanced <span
+                                    class="tag-count">17</span></span>
+                            <span class="tag-badge" data-tag="official">官方 Official <span
+                                    class="tag-count">2</span></span>
+                            <span class="tag-badge" data-tag="community">社群 Community <span
+                                    class="tag-count">22</span></span>
+                            <span class="tag-badge" data-tag="design">設計 Design <span class="tag-count">10</span></span>
+                            <span class="tag-badge" data-tag="frontend">前端 Frontend <span
+                                    class="tag-count">8</span></span>
+                            <span class="tag-badge" data-tag="tools">工具 Tools <span class="tag-count">6</span></span>
                         </div>
                     </div>
+                </aside>
 
-                    <!-- Category: Front-End Development -->
-                    <div class="skill-category-group">
-                        <h3>💻 前端開發技能 <span
-                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(Front-End
-                                Development)</span></h3>
-                        <div class="skill-grid">
-                            <div class="skill-card">
-                                <h4>senior-frontend</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>自動化前端工作流程與腳手架。<br><span class="en">Automate frontend workflows & scaffolding.</span>
-                                </p>
-                                <a href="https://skills.rest/skill/senior-frontend" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>flow-error-eslint-compliance</h4>
-                                <span class="skill-tag">官方 Official</span>
-                                <p>修復遷移後的 ESLint 問題。<br><span class="en">Fix ESLint issues post-migration.</span></p>
-                                <a href="https://skills.rest/skill/flow-error-eslint-compliance" target="_blank">查看技能
-                                    View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>run-linters</h4>
-                                <span class="skill-tag">官方 Official</span>
-                                <p>執行 Linter 驗證程式碼品質。<br><span class="en">Run linters to verify code quality after
-                                        changes.</span></p>
-                                <a href="https://skills.rest/skill/run-linters" target="_blank">查看技能 View Skill</a>
-                            </div>
-                        </div>
+                <!-- Main Content Area -->
+                <main class="skills-main">
+                    <div class="skills-header">
+                        <h2>🧠 UX Agent 技能庫 <span class="en">UX Agent Skills</span></h2>
+                        <p class="skills-count"><span id="skill-count">24</span> 個技能 skills found</p>
                     </div>
 
-                    <!-- Category: Dev Tools -->
-                    <div class="skill-category-group">
-                        <h3>🔧 開發工具 <span
-                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(Development
-                                Tools)</span></h3>
-                        <div class="skill-grid">
-                            <div class="skill-card">
-                                <h4>code-review</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>系統化的程式碼審查，確保品質與安全性。<br><span class="en">Systematic code reviews for quality and
-                                        security.</span></p>
-                                <a href="https://skills.rest/skill/code-review" target="_blank">查看技能 View Skill</a>
+                    <div class="skills-grid" id="skills-grid">
+                        <!-- UX/UI Design Skills -->
+                        <article class="skill-card-new" data-category="product-designer ui-designer"
+                            data-tags="advanced,community,design">
+                            <h3 class="skill-title">UI/UX 專業設計</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                快速設計精美的 UI/UX。規劃與實作使用者介面。
+                                <span class="en">Design stunning UI/UX fast. Plan and implement UI.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">📦 Product Designer</span>
+                                <span class="skill-badge category">🎨 UI Designer</span>
                             </div>
-                            <div class="skill-card">
-                                <h4>naming</h4>
-                                <span class="skill-tag">社群 Community</span>
-                                <p>語義化、可排序的命名慣例。<br><span class="en">Semantic, sortable naming conventions.</span></p>
-                                <a href="https://skills.rest/skill/naming" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>quality-gate</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>提交與部署前的品質閘門。<br><span class="en">Quality gates before commits and deployments.</span>
-                                </p>
-                                <a href="https://skills.rest/skill/quality-gate" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>create-pr</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>從程式碼變更生成 PR 內容。<br><span class="en">Generate PR content from code changes.</span></p>
-                                <a href="https://skills.rest/skill/create-pr" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>create-issue</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>自動在 GitHub 或 Jira 建立議題。<br><span class="en">Automatically file issues in GitHub or
-                                        Jira.</span></p>
-                                <a href="https://skills.rest/skill/create-issue" target="_blank">查看技能 View Skill</a>
-                            </div>
-                        </div>
-                    </div>
+                            <a href="https://skills.rest/skill/ui-ux-pro-max" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
 
-                    <!-- Category: API & Architecture -->
-                    <div class="skill-category-group">
-                        <h3>🎯 API 與架構 <span
-                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(API &
-                                Architecture)</span></h3>
-                        <div class="skill-grid">
-                            <div class="skill-card">
-                                <h4>api-design-principles</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>REST 與 GraphQL API 設計，打造可擴展的 API。<br><span class="en">REST & GraphQL API design for
-                                        scalable APIs.</span></p>
-                                <a href="https://skills.rest/skill/api-design-principles" target="_blank">查看技能 View
-                                    Skill</a>
+                        <article class="skill-card-new" data-category="ui-designer ux-architect"
+                            data-tags="advanced,community,design">
+                            <h3 class="skill-title">前端設計系統</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                製作具有獨特風格的生產級 UI (nbarthelemy)。
+                                <span class="en">Unique style production-ready UI.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🎨 UI Designer</span>
+                                <span class="skill-badge category">🏗️ UX Architect</span>
                             </div>
-                            <div class="skill-card">
-                                <h4>orchestrate-spec</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>自動偵測待處理元件並起草規格。<br><span class="en">Auto-detects next pending component and drafts
-                                        specs.</span></p>
-                                <a href="https://skills.rest/skill/orchestrate-spec" target="_blank">查看技能 View Skill</a>
-                            </div>
-                        </div>
-                    </div>
+                            <a href="https://skills.rest/skill/frontend-design" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
 
-                    <!-- Category: Design & Creative -->
-                    <div class="skill-category-group">
-                        <h3>📐 設計與創意工具 <span
-                                style="font-size: 14px; font-weight: 500; color: var(--text-secondary);">(Design &
-                                Creative Tools)</span></h3>
-                        <div class="skill-grid">
-                            <div class="skill-card">
-                                <h4>prompt-engineering-patterns</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>設計可靠、高品質的提示詞模式。<br><span class="en">Design prompts that yield reliable, high-quality
-                                        outputs.</span></p>
-                                <a href="https://skills.rest/skill/prompt-engineering-patterns" target="_blank">查看技能
-                                    View Skill</a>
+                        <article class="skill-card-new" data-category="product-designer ui-designer"
+                            data-tags="advanced,community,design">
+                            <h3 class="skill-title">Figma 分析工具</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                透過 API 從 Figma 提取設計資源。
+                                <span class="en">Extract design assets from Figma via API.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">📦 Product Designer</span>
+                                <span class="skill-badge category">🎨 UI Designer</span>
                             </div>
-                            <div class="skill-card">
-                                <h4>obsidian-canvas</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>自動生成 Obsidian Canvas 知識地圖佈局。<br><span class="en">Auto-generate Obsidian Canvas
-                                        knowledge map layouts.</span></p>
-                                <a href="https://skills.rest/skill/obsidian-canvas" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>markdown-slides</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>從 Markdown 內容建立 Deckset/Marp 簡報。<br><span class="en">Create Deckset/Marp slides from
-                                        Markdown content.</span></p>
-                                <a href="https://skills.rest/skill/markdown-slides" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>markdown-video</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>將 markdown 簡報轉為有旁白的影片。<br><span class="en">Convert markdown to narrated video
-                                        (Gemini/OpenAI).</span></p>
-                                <a href="https://skills.rest/skill/markdown-video" target="_blank">查看技能 View Skill</a>
-                            </div>
-                            <div class="skill-card">
-                                <h4>pptx</h4>
-                                <span class="skill-tag">進階 Advanced</span>
-                                <p>程式化建立與編輯 PowerPoint 簡報。<br><span class="en">Create and edit PowerPoint presentations
-                                        programmatically.</span></p>
-                                <a href="https://skills.rest/skill/pptx" target="_blank">查看技能 View Skill</a>
-                            </div>
-                        </div>
-                    </div>
+                            <a href="https://skills.rest/skill/figma-analyzer" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
 
-                </div>
+                        <article class="skill-card-new" data-category="ux-architect"
+                            data-tags="advanced,community,design">
+                            <h3 class="skill-title">設計系統建構</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                簡化設計 Token 與 UI 架構。
+                                <span class="en">Streamline design tokens and UI architecture.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🏗️ UX Architect</span>
+                            </div>
+                            <a href="https://skills.rest/skill/design-system" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="ui-designer" data-tags="official,design">
+                            <h3 class="skill-title">圖片素材搜尋
+                            </h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                即時獲取完美的 Unsplash 圖片。
+                                <span class="en">Instantly fetch perfect Unsplash images.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🎨 UI Designer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/unsplash-image-finder" target="_blank"
+                                class="skill-link">查看技能 View Skill →</a>
+                        </article>
+
+                        <!-- CSS & Animation Skills -->
+                        <article class="skill-card-new" data-category="ui-designer" data-tags="community,frontend">
+                            <h3 class="skill-title">CSS 樣式設計</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                製作可擴展、響應式的 CSS 模式。
+                                <span class="en">Scalable, responsive CSS patterns.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🎨 UI Designer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/css" target="_blank" class="skill-link">查看技能 View Skill
+                                →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="ui-designer" data-tags="community,frontend">
+                            <h3 class="skill-title">Tailwind 框架</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                使用 Tailwind 打造可擴展 UI。
+                                <span class="en">Scalable UI with Tailwind.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🎨 UI Designer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/tailwind" target="_blank" class="skill-link">查看技能 View
+                                Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="interaction-designer"
+                            data-tags="advanced,community,frontend">
+                            <h3 class="skill-title">GSAP 動畫引擎</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                製作高性能 GSAP 動畫。
+                                <span class="en">High-performance GSAP animations.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🎬 Interaction Designer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/gsap" target="_blank" class="skill-link">查看技能 View Skill
+                                →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="interaction-designer"
+                            data-tags="advanced,community,frontend">
+                            <h3 class="skill-title">3D 輪播效果</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                安全旋轉的 3D coverflow 輪播。
+                                <span class="en">Secure rotatable 3D coverflow carousel.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🎬 Interaction Designer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/coverflow" target="_blank" class="skill-link">查看技能 View
+                                Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="interaction-designer"
+                            data-tags="advanced,community,frontend">
+                            <h3 class="skill-title">Canvas 視覺特效</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                製作高性能 Canvas 視覺效果。
+                                <span class="en">High-performance Canvas visual effects.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🎬 Interaction Designer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/canvas-effects" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
+
+                        <!-- Frontend Development Skills -->
+                        <article class="skill-card-new" data-category="other" data-tags="advanced,official,frontend">
+                            <h3 class="skill-title">前端工作流程</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                自動化前端工作流程與腳手架。
+                                <span class="en">Automate frontend workflows & scaffolding.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🔧 Others</span>
+                            </div>
+                            <a href="https://skills.rest/skill/senior-frontend" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="other" data-tags="official,frontend">
+                            <h3 class="skill-title">ESLint 程式檢查
+                            </h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                修復遷移後的 ESLint 問題。
+                                <span class="en">Fix ESLint issues post-migration.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🔧 Others</span>
+                            </div>
+                            <a href="https://skills.rest/skill/flow-error-eslint-compliance" target="_blank"
+                                class="skill-link">查看技能 View Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="other" data-tags="official,frontend">
+                            <h3 class="skill-title">程式碼品質檢測</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                執行 Linter 驗證程式碼品質。
+                                <span class="en">Run linters to verify code quality after changes.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🔧 Others</span>
+                            </div>
+                            <a href="https://skills.rest/skill/run-linters" target="_blank" class="skill-link">查看技能 View
+                                Skill →</a>
+                        </article>
+
+                        <!-- Dev Tools -->
+                        <article class="skill-card-new" data-category="other" data-tags="advanced,community,tools">
+                            <h3 class="skill-title">程式碼審查</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                系統化的程式碼審查，確保品質與安全性。
+                                <span class="en">Systematic code reviews for quality and security.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🔧 Others</span>
+                            </div>
+                            <a href="https://skills.rest/skill/code-review" target="_blank" class="skill-link">查看技能 View
+                                Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="ux-architect" data-tags="community,tools">
+                            <h3 class="skill-title">命名規範</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                語義化、可排序的命名慣例。
+                                <span class="en">Semantic, sortable naming conventions.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🏗️ UX Architect</span>
+                            </div>
+                            <a href="https://skills.rest/skill/naming" target="_blank" class="skill-link">查看技能 View
+                                Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="other" data-tags="advanced,community,tools">
+                            <h3 class="skill-title">品質閘門</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                提交與部署前的品質閘門。
+                                <span class="en">Quality gates before commits and deployments.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🔧 Others</span>
+                            </div>
+                            <a href="https://skills.rest/skill/quality-gate" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="other" data-tags="advanced,official,tools">
+                            <h3 class="skill-title">PR 內容生成</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                從程式碼變更生成 PR 內容。
+                                <span class="en">Generate PR content from code changes.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🔧 Others</span>
+                            </div>
+                            <a href="https://skills.rest/skill/create-pr" target="_blank" class="skill-link">查看技能 View
+                                Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="other" data-tags="advanced,official,tools">
+                            <h3 class="skill-title">議題自動建立</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                自動在 GitHub 或 Jira 建立議題。
+                                <span class="en">Automatically file issues in GitHub or Jira.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🔧 Others</span>
+                            </div>
+                            <a href="https://skills.rest/skill/create-issue" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
+
+                        <!-- API & Architecture -->
+                        <article class="skill-card-new" data-category="ux-architect" data-tags="advanced,official">
+                            <h3 class="skill-title">API 設計原則
+                            </h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                REST 與 GraphQL API 設計，打造可擴展的 API。
+                                <span class="en">REST & GraphQL API design for scalable APIs.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🏗️ UX Architect</span>
+                            </div>
+                            <a href="https://skills.rest/skill/api-design-principles" target="_blank"
+                                class="skill-link">查看技能 View Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="product-designer ux-architect"
+                            data-tags="advanced,community">
+                            <h3 class="skill-title">規格編排工具</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                自動偵測待處理元件並起草規格。
+                                <span class="en">Auto-detects next pending component and drafts specs.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">📦 Product Designer</span>
+                                <span class="skill-badge category">🏗️ UX Architect</span>
+                            </div>
+                            <a href="https://skills.rest/skill/orchestrate-spec" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
+
+                        <!-- Design & Creative -->
+                        <article class="skill-card-new" data-category="ux-writer" data-tags="advanced,official,design">
+                            <h3 class="skill-title">提示詞工程</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                設計可靠、高品質的提示詞模式。
+                                <span class="en">Design prompts that yield reliable, high-quality outputs.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">✍️ UX Writer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/prompt-engineering-patterns" target="_blank"
+                                class="skill-link">查看技能 View Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="user-researcher"
+                            data-tags="advanced,community,design">
+                            <h3 class="skill-title">知識地圖生成</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                自動生成 Obsidian Canvas 知識地圖佈局。
+                                <span class="en">Auto-generate Obsidian Canvas knowledge map layouts.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">🔬 User Researcher</span>
+                            </div>
+                            <a href="https://skills.rest/skill/obsidian-canvas" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="ux-writer" data-tags="advanced,community,design">
+                            <h3 class="skill-title">Markdown 簡報</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                從 Markdown 內容建立 Deckset/Marp 簡報。
+                                <span class="en">Create Deckset/Marp slides from Markdown content.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">✍️ UX Writer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/markdown-slides" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="ux-writer" data-tags="advanced,community,design">
+                            <h3 class="skill-title">簡報轉影片</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                將 markdown 簡報轉為有旁白的影片。
+                                <span class="en">Convert markdown to narrated video (Gemini/OpenAI).</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">✍️ UX Writer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/markdown-video" target="_blank" class="skill-link">查看技能
+                                View Skill →</a>
+                        </article>
+
+                        <article class="skill-card-new" data-category="ux-writer interaction-designer"
+                            data-tags="advanced,community,design">
+                            <h3 class="skill-title">PowerPoint 自動化</h3>
+                            <time class="skill-date">January 12, 2026</time>
+                            <p class="skill-description">
+                                程式化建立與編輯 PowerPoint 簡報。
+                                <span class="en">Create and edit PowerPoint presentations programmatically.</span>
+                            </p>
+                            <div class="skill-tags-row">
+                                <span class="skill-badge category">✍️ UX Writer</span>
+                                <span class="skill-badge category">🎬 Interaction Designer</span>
+                            </div>
+                            <a href="https://skills.rest/skill/pptx" target="_blank" class="skill-link">查看技能 View Skill
+                                →</a>
+                        </article>
+                    </div>
+                </main>
             </div>
         </div>
-    </main>
 
-    <footer>
-        <div class="footer-content">
-            <p class="license-notice">
-                📖 本資料集僅供教育與研究用途，商用需取得授權。引用時請標註完整來源。<br>
-                <span class="en">This dataset is for educational and research purposes only. Commercial use requires
-                    permission. Please cite the full source when referencing.</span>
-            </p>
-            <p class="copyright">
-                &copy; 2025 <strong>PrivacyUX Consulting Ltd.</strong> All rights reserved. |
-                Licensed under <a href="https://github.com/gainshin/ui-ux-pro-design_system/blob/main/LICENSE"
-                    target="_blank">CC BY-NC 4.0</a>
-            </p>
-        </div>
-    </footer>
 
-    <!-- Floating Clear Style Button -->
-    <button class="clear-style-btn hidden" id="clear-style-btn">
-        <span class="clear-icon">✕</span>
-        <span class="clear-text">清除樣式 (Clear Style)</span>
-    </button>
 
-    <script src="data.js"></script>
-    <script src="viewer.js"></script>
+
+        <footer>
+            <div class="footer-content">
+                <p class="license-notice">
+                    📖 本資料集僅供教育與研究用途，商用需取得授權。引用時請標註完整來源。<br>
+                    <span class="en">This dataset is for educational and research purposes only. Commercial use requires
+                        permission. Please cite the full source when referencing.</span>
+                </p>
+            </div>
+        </footer>
+
+        <!-- Floating Clear Style Button -->
+
+        <button class="clear-style-btn hidden" id="clear-style-btn">
+            <span class="clear-icon">✕</span>
+            <span class="clear-text">清除樣式 (Clear Style)</span>
+        </button>
+
+        <script src="data.js"></script>
+        <script src="viewer.js"></script>
+        <script>
+            // Skills Filtering Logic
+            document.addEventListener('DOMContentLoaded', function () {
+                const categoryItems = document.querySelectorAll('.category-item');
+                const tagBadges = document.querySelectorAll('.tag-badge');
+                const skillCards = document.querySelectorAll('.skill-card-new');
+                const skillCountElement = document.getElementById('skill-count');
+
+                let activeCategory = 'all';
+                let activeTag = null;
+
+                // Category filtering
+                categoryItems.forEach(item => {
+                    item.addEventListener('click', function () {
+                        const category = this.dataset.category;
+
+                        // Update active state
+                        categoryItems.forEach(cat => cat.classList.remove('active'));
+                        this.classList.add('active');
+
+                        activeCategory = category;
+                        activeTag = null; // Reset tag filter when category changes
+
+                        // Remove active state from tags
+                        tagBadges.forEach(tag => tag.classList.remove('active'));
+
+                        filterSkills();
+                    });
+                });
+
+                // Tag filtering
+                tagBadges.forEach(badge => {
+                    badge.addEventListener('click', function () {
+                        const tag = this.dataset.tag;
+
+                        // Toggle tag selection
+                        if (activeTag === tag) {
+                            activeTag = null;
+                            this.classList.remove('active');
+                        } else {
+                            tagBadges.forEach(t => t.classList.remove('active'));
+                            this.classList.add('active');
+                            activeTag = tag;
+                        }
+
+                        filterSkills();
+                    });
+                });
+
+                function filterSkills() {
+                    let visibleCount = 0;
+
+                    skillCards.forEach(card => {
+                        const cardCategories = card.dataset.category.split(' '); // Support multi-role
+                        const cardTags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+
+                        let showCard = true;
+
+                        // Filter by category (check if any of the card's categories match)
+                        if (activeCategory !== 'all' && !cardCategories.includes(activeCategory)) {
+                            showCard = false;
+                        }
+
+                        // Filter by tag
+                        if (activeTag && !cardTags.includes(activeTag)) {
+                            showCard = false;
+                        }
+
+                        // Show/hide card with animation
+                        if (showCard) {
+                            card.style.display = 'flex';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 10);
+                            visibleCount++;
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(10px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+
+                    // Update count
+                    skillCountElement.textContent = visibleCount;
+                }
+
+                // Add CSS for smooth transitions
+                skillCards.forEach(card => {
+                    card.style.transition = 'opacity 0.3s, transform 0.3s';
+                });
+            });
+        </script>
 </body>
 
 </html>

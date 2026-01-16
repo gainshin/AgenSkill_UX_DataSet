@@ -1847,3 +1847,217 @@ function initGuidelinesFlow() {
     showScreen('persona');
 }
 
+// ================================================
+// UICrit Design Critique Library Functions
+// ================================================
+
+let critiquesData = [];
+let uicritScreensData = [];
+
+async function loadCritiques() {
+    const grid = document.getElementById('critiques-grid');
+    if (!grid) return;
+
+    try {
+        // Try to load from JSON file (works with HTTP server)
+        const response = await fetch('data/uicrit_curated.json');
+        if (response.ok) {
+            uicritScreensData = await response.json();
+            renderUICritScreens(uicritScreensData);
+            initCritiqueFilters();
+            updateCritiqueCounts();
+            return;
+        }
+    } catch (error) {
+        console.warn('UICrit JSON not loaded via fetch, trying embedded fallback:', error);
+    }
+
+    // Fallback to embedded data from DS_DATA (for file:// protocol)
+    if (window.DS_DATA && window.DS_DATA.critiques) {
+        critiquesData = window.DS_DATA.critiques;
+        renderCritiquesLegacy(critiquesData);
+        initCritiqueFilters();
+    } else {
+        grid.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #6b7280;">
+                <p>📂 UICrit 資料需要 HTTP 伺服器才能載入</p>
+                <p style="font-size: 13px;">啟動方式: <code>python3 -m http.server 8000</code></p>
+            </div>
+        `;
+    }
+}
+
+function renderUICritScreens(screens) {
+    const grid = document.getElementById('critiques-grid');
+    if (!grid) return;
+
+    // Flatten to individual critiques for display (take first 3 per screen)
+    const allCritiques = [];
+    screens.forEach(screen => {
+        const screenCritiques = screen.critiques.slice(0, 3);
+        screenCritiques.forEach(c => {
+            allCritiques.push({
+                rico_id: screen.rico_id,
+                task: screen.task,
+                ratings: screen.ratings,
+                severity: screen.severity,
+                ...c
+            });
+        });
+    });
+
+    // Take top 60 critiques for display
+    const displayCritiques = allCritiques.slice(0, 60);
+
+    grid.innerHTML = displayCritiques.map(c => {
+        const categoryIcons = {
+            'accessibility': '♿',
+            'typography': '🔤',
+            'color': '🎨',
+            'spacing': '📐',
+            'interaction': '👆',
+            'hierarchy': '📊',
+            'general': '📝'
+        };
+
+        const icon = categoryIcons[c.category] || '📝';
+        const severityClass = c.severity || 'medium';
+
+        const getRatingClass = (value) => {
+            if (!value) return '';
+            if (value >= 7) return 'good';
+            if (value >= 5) return 'medium';
+            return 'poor';
+        };
+
+        // Clean up comment prefix
+        let critiqueText = c.text || '';
+        critiqueText = critiqueText.replace(/^(Comment \d+|LLM Comment \d+)\n/, '');
+        // Truncate long text
+        if (critiqueText.length > 300) {
+            critiqueText = critiqueText.substring(0, 297) + '...';
+        }
+
+        const sourceLabel = c.source === 'human' ? '👤 Human' : c.source === 'llm' ? '🤖 LLM' : '🔀 Both';
+
+        return `
+            <div class="critique-card" data-category="${c.category}">
+                <div class="critique-card-header">
+                    <span class="critique-task">${c.task.substring(0, 50)}${c.task.length > 50 ? '...' : ''}</span>
+                    <span class="critique-severity ${severityClass}">${severityClass}</span>
+                </div>
+                <p class="critique-text">${critiqueText}</p>
+                <div class="critique-meta">
+                    <span class="critique-category-badge">${icon} ${c.category}</span>
+                    <span class="critique-source-badge">${sourceLabel}</span>
+                    <span class="critique-rico-id">RICO: ${c.rico_id}</span>
+                </div>
+                <div class="critique-ratings">
+                    <div class="critique-rating-item">
+                        <span class="critique-rating-label">美學</span>
+                        <span class="critique-rating-value ${getRatingClass(c.ratings?.aesthetics)}">${c.ratings?.aesthetics || '-'}</span>
+                    </div>
+                    <div class="critique-rating-item">
+                        <span class="critique-rating-label">易用性</span>
+                        <span class="critique-rating-value ${getRatingClass(c.ratings?.usability)}">${c.ratings?.usability || '-'}</span>
+                    </div>
+                    <div class="critique-rating-item">
+                        <span class="critique-rating-label">效率</span>
+                        <span class="critique-rating-value ${getRatingClass(c.ratings?.efficiency)}">${c.ratings?.efficiency || '-'}</span>
+                    </div>
+                    <div class="critique-rating-item">
+                        <span class="critique-rating-label">品質</span>
+                        <span class="critique-rating-value ${getRatingClass(c.ratings?.design_quality)}">${c.ratings?.design_quality || '-'}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Legacy render for embedded DS_DATA format
+function renderCritiquesLegacy(critiques) {
+    const grid = document.getElementById('critiques-grid');
+    if (!grid) return;
+
+    grid.innerHTML = critiques.map(c => {
+        const categoryIcons = {
+            'accessibility': '♿',
+            'typography': '🔤',
+            'color': '🎨',
+            'spacing': '📐',
+            'interaction': '👆',
+            'hierarchy': '📊'
+        };
+
+        const icon = categoryIcons[c.category] || '📝';
+        const severityClass = c.severity;
+
+        const getRatingClass = (value) => {
+            if (value >= 7) return 'good';
+            if (value >= 5) return 'medium';
+            return 'poor';
+        };
+
+        return `
+            <div class="critique-card" data-category="${c.category}">
+                <div class="critique-card-header">
+                    <span class="critique-task">${c.task}</span>
+                    <span class="critique-severity ${severityClass}">${c.severity}</span>
+                </div>
+                <p class="critique-text">${c.critique}</p>
+                <span class="critique-category-badge">${icon} ${c.category}</span>
+                <div class="critique-ratings">
+                    <div class="critique-rating-item">
+                        <span class="critique-rating-label">美學</span>
+                        <span class="critique-rating-value ${getRatingClass(c.ratings.aesthetics)}">${c.ratings.aesthetics}</span>
+                    </div>
+                    <div class="critique-rating-item">
+                        <span class="critique-rating-label">易用性</span>
+                        <span class="critique-rating-value ${getRatingClass(c.ratings.usability)}">${c.ratings.usability}</span>
+                    </div>
+                    <div class="critique-rating-item">
+                        <span class="critique-rating-label">總體</span>
+                        <span class="critique-rating-value ${getRatingClass(c.ratings.overall)}">${c.ratings.overall}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function initCritiqueFilters() {
+    const filterBtns = document.querySelectorAll('.critique-filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update active state
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter cards
+            const filter = btn.dataset.filter;
+            const cards = document.querySelectorAll('.critique-card');
+            let visibleCount = 0;
+            cards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+function updateCritiqueCounts() {
+    const cards = document.querySelectorAll('.critique-card');
+    const countEl = document.querySelector('.critique-library-section .section-desc');
+    if (countEl && cards.length > 0) {
+        countEl.textContent = `UICrit 資料集：${uicritScreensData.length} 個畫面，${cards.length} 條評論。基於 RICO UI 截圖的專業設計評論。`;
+    }
+}
+
+// Auto-load critiques when DOM ready
+document.addEventListener('DOMContentLoaded', loadCritiques);
+

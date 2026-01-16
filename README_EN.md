@@ -26,6 +26,7 @@ It demonstrates the complete decision-making process from "Visual Style Selectio
 |--------|-------------|--------|
 | 🎨 **Visual Intelligence** | 57 distinct design styles with full CSS implementation and interactive visualization | ✅ Completed |
 | 🛡️ **Ethical Intelligence** | 4-layer Dark Pattern dataset with annotated cases and COT analysis | ✅ Completed |
+| 📝 **UICrit Design Critique Library** | 1,000 RICO UI screens with professional design critiques and ratings | ✅ Integrated |
 | 🧠 **Agent Generator (Vision)** | Reasoning engine & **24+ Integrated Agentic Skills** (skills.rest) | ✅ Completed (v1.0) |
 
 ### 🤖 Agent Integration (Skill Usage)
@@ -70,7 +71,27 @@ A **4-layer data structure** based on the AidUI framework, designed to train Age
     *   **Reasoning**: Psychological impact assessment
     *   **Remediation**: 5-step concrete improvement plan
 
-### 3. 🧠 Agent Generator: UX Agent Skills (New)
+### 3. 📝 UICrit Design Critique Library (New)
+
+Integrates the **UICrit Dataset** released by Google Research, containing professional design critiques for 1,000 mobile UI screens from RICO.
+
+*   **Dataset Size**: 11,344 design critiques across 1,000 screens
+*   **Rating Dimensions**: Aesthetics, Learnability, Efficiency, Usability, Design Quality
+*   **Comment Sources**: 👤 Human / 🤖 LLM / 🔀 Both
+*   **Categories**: Typography, Color, Spacing, Hierarchy, Interaction, Accessibility
+*   **Bounding Box**: Each critique includes precise location coordinates
+
+**Data Files:**
+*   `data/uicrit_public.csv` - Original CSV (4.8MB)
+*   `data/uicrit_full.json` - Full JSON (1,000 screens)
+*   `data/uicrit_curated.json` - Curated subset (50 screens)
+
+**Citation:**
+> Yang, G., et al. (2024). *Can AI Assistants Know What They Don't Know?* UIST '24.  
+> https://dl.acm.org/doi/10.1145/3654777.3676381  
+> Dataset: https://github.com/google-research-datasets/uicrit
+
+### 4. 🧠 Agent Generator: UX Agent Skills (Latest)
 
 The Generator tab now features a **Card-based Skill Library** integrated from `skills.rest`, categorizing 24+ essential skills for the UX Agent persona.
 

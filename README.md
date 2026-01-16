@@ -27,6 +27,7 @@
 |------|------|------|
 | 🎨 **視覺智能 (Visual Intelligence)** | 57 種設計風格的完整 CSS 實現與互動展示 | ✅ 已完成 |
 | 🛡️ **倫理智能 (Ethical Intelligence)** | 4 層結構的 Dark Pattern 標註數據集與 COT 分析 | ✅ 已完成 |
+| 📝 **UICrit 設計評論庫** | 1,000 個 RICO UI 畫面的專業設計評論與評分 | ✅ 已整合 |
 | 🧠 **Agent Generator (Vision)** | 推理引擎與 **24+ 整合 Agentic Skills** (skills.rest) | ✅ 已完成 (v1.0) |
 
 ### 🤖 Agent 使用指南 (Agent Integration)
@@ -69,7 +70,27 @@
     *   **推理 (Reasoning)**: 心理學影響評估
     *   **改善 (Remediation)**: 5 步驟具體修復建議
 
-### 3. 🧠 Agent Generator: UX Agent Skills (最新)
+### 3. 📝 UICrit 設計評論庫 (新增)
+
+整合 Google Research 發布的 **UICrit 資料集**，包含 1,000 個 RICO 行動 UI 畫面的專業設計評論。
+
+*   **資料規模**: 11,344 條設計評論，1,000 個畫面
+*   **評分維度**: 美學 (Aesthetics)、易學性 (Learnability)、效率 (Efficiency)、易用性 (Usability)、設計品質 (Design Quality)
+*   **評論來源**: 👤 Human / 🤖 LLM / 🔀 Both
+*   **評論分類**: Typography, Color, Spacing, Hierarchy, Interaction, Accessibility
+*   **Bounding Box**: 每條評論含精確定位座標
+
+**資料檔案:**
+*   `data/uicrit_public.csv` - 原始 CSV (4.8MB)
+*   `data/uicrit_full.json` - 完整 JSON (1,000 畫面)
+*   `data/uicrit_curated.json` - 精選子集 (50 畫面)
+
+**引用來源:**
+> Yang, G., et al. (2024). *Can AI Assistants Know What They Don't Know?* UIST '24.  
+> https://dl.acm.org/doi/10.1145/3654777.3676381  
+> Dataset: https://github.com/google-research-datasets/uicrit
+
+### 4. 🧠 Agent Generator: UX Agent Skills (最新)
 
 Generator 分頁現在整合了來自 `skills.rest` 的 **卡片式技能庫 (Skill Library)**，分類了 24+ 個 UX Agent 必備技能。
 

@@ -58,6 +58,9 @@
                     <span class="badge-item">🔤 Typography</span>
                     <span class="badge-item">⚠️ Dark Patterns</span>
                     <span class="badge-item">🤖 AI COT</span>
+                    <span class="badge-item badge-new"
+                        onclick="document.querySelector('[data-tab=guidelines]').click(); setTimeout(() => document.querySelector('.critique-library-section')?.scrollIntoView({behavior: 'smooth'}), 500);">📝
+                        UICrit 評論庫</span>
                 </div>
             </div>
         </div>
@@ -167,6 +170,19 @@
                             framework</strong>
                         to understand how design decisions impact users and business outcomes.
                     </p>
+                </div>
+
+                <!-- UICrit Quick Access -->
+                <div class="uicrit-quick-access">
+                    <div class="uicrit-quick-card"
+                        onclick="selectPersona('ic'); setTimeout(() => document.querySelector('.critique-library-section')?.scrollIntoView({behavior: 'smooth'}), 300);">
+                        <div class="uicrit-quick-icon">📝</div>
+                        <div class="uicrit-quick-content">
+                            <h4>UICrit 設計評論庫 <span class="badge-tag">NEW</span></h4>
+                            <p>1,000 個 RICO UI 畫面 · 11,344 條專業設計評論</p>
+                            <span class="uicrit-quick-link">點擊進入 →</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Perspective Toggle -->

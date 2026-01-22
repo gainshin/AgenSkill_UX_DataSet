@@ -4256,3 +4256,371 @@ body.theme-sales .card {
     font-weight: 600;
     color: #d97706;
 }
+
+/* ===== COT Audit Tab Styles ===== */
+.cot-audit-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.cot-audit-header h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+}
+
+.cot-audit-header .section-desc {
+    color: var(--text-secondary);
+    font-size: 15px;
+}
+
+/* Path Toggle */
+.cot-path-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.path-btn {
+    padding: 12px 24px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.path-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.path-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.cot-path-content {
+    display: block;
+}
+
+.cot-path-content.hidden {
+    display: none;
+}
+
+/* Checklist Grid */
+.checklist-intro {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.checklist-intro h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+}
+
+.checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.checklist-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.checklist-section h4 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.checklist-item:hover {
+    color: var(--primary);
+}
+
+.checklist-item input[type="checkbox"],
+.checklist-item input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Generate Actions */
+.generate-actions {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.cta-generate-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.cta-generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.generate-status {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Skill Preview */
+.skill-preview {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+}
+
+.skill-preview h4 {
+    color: #94a3b8;
+    margin: 0 0 16px 0;
+    font-size: 14px;
+}
+
+.skill-preview pre {
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    color: #e2e8f0;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+    max-height: 400px;
+}
+
+.skill-preview .copy-btn,
+.skill-preview .download-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: all 0.2s;
+}
+
+.skill-preview .copy-btn:hover,
+.skill-preview .download-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Log Import Section */
+.log-import-section {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.log-import-section h3 {
+    margin: 0 0 12px 0;
+}
+
+.log-drop-zone {
+    border: 3px dashed var(--border);
+    border-radius: 16px;
+    padding: 60px 40px;
+    background: var(--bg);
+    transition: all 0.3s;
+    max-width: 500px;
+    margin: 24px auto;
+}
+
+.log-drop-zone:hover,
+.log-drop-zone.dragover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.log-drop-zone .drop-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.log-drop-zone p {
+    margin: 0 0 16px 0;
+    color: var(--text-secondary);
+}
+
+.browse-btn {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.browse-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Trace Viewer */
+.trace-viewer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+}
+
+.trace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.trace-header h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.audit-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.audit-badge.unverified {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.audit-badge.pass {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.audit-badge.fail {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.trace-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.meta-item {
+    font-size: 14px;
+}
+
+.meta-item strong {
+    color: var(--text-secondary);
+    margin-right: 8px;
+}
+
+.trace-data-source,
+.trace-cot-steps {
+    margin-bottom: 24px;
+}
+
+.trace-data-source h5,
+.trace-cot-steps h5 {
+    font-size: 15px;
+    margin: 0 0 12px 0;
+    color: var(--text-main);
+}
+
+.trace-data-source code {
+    background: var(--bg);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.cot-steps-list {
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 20px 20px 20px 40px;
+    margin: 0;
+}
+
+.cot-steps-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.cot-steps-list li:last-child {
+    border-bottom: none;
+}
+
+/* Used/Rejected Grid */
+.trace-used-rejected {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.used-column,
+.rejected-column {
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.used-column h5,
+.rejected-column h5 {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+}
+
+.used-column ul,
+.rejected-column ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.used-column li {
+    color: #059669;
+}
+
+.rejected-column li {
+    color: #dc2626;
+}

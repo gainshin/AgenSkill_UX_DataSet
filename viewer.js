@@ -2083,3 +2083,275 @@ function updateCritiqueCounts() {
 // Auto-load critiques when DOM ready
 document.addEventListener('DOMContentLoaded', loadCritiques);
 
+// ================================================
+// COT AUDIT TAB FUNCTIONALITY
+// ================================================
+
+function initCOTAuditTab() {
+    // Path Toggle
+    const pathBtns = document.querySelectorAll('.path-btn');
+    const pathGenerate = document.getElementById('cot-path-generate');
+    const pathReview = document.getElementById('cot-path-review');
+
+    pathBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            pathBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const path = btn.dataset.path;
+            if (path === 'generate') {
+                pathGenerate.classList.add('active');
+                pathGenerate.classList.remove('hidden');
+                pathReview.classList.add('hidden');
+                pathReview.classList.remove('active');
+            } else {
+                pathReview.classList.add('active');
+                pathReview.classList.remove('hidden');
+                pathGenerate.classList.add('hidden');
+                pathGenerate.classList.remove('active');
+            }
+        });
+    });
+
+    // Generate skill.md button
+    const generateBtn = document.getElementById('generate-skill-btn');
+    const skillPreview = document.getElementById('skill-preview');
+    const skillPreviewContent = document.getElementById('skill-preview-content');
+    const generateStatus = document.getElementById('generate-status');
+
+    if (generateBtn) {
+        generateBtn.addEventListener('click', () => {
+            const selections = gatherCheckedItems();
+            const skillMdContent = buildSkillMd(selections);
+
+            skillPreviewContent.textContent = skillMdContent;
+            skillPreview.classList.remove('hidden');
+            generateStatus.textContent = `✅ 已生成 skill.md，包含 ${Object.values(selections).flat().length} 個項目`;
+        });
+    }
+
+    // Copy button
+    const copyBtn = document.getElementById('copy-skill-btn');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            const content = skillPreviewContent.textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                copyBtn.textContent = '✅ 已複製！';
+                setTimeout(() => {
+                    copyBtn.textContent = '📋 複製到剪貼板 (Copy)';
+                }, 2000);
+            });
+        });
+    }
+
+    // Download button
+    const downloadBtn = document.getElementById('download-skill-btn');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+            const content = skillPreviewContent.textContent;
+            const blob = new Blob([content], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'skill.md';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    }
+
+    // Log Import (Path B)
+    initLogImport();
+}
+
+function gatherCheckedItems() {
+    const selections = {
+        styles: [],
+        colors: [],
+        ethics: [],
+        persona: null
+    };
+
+    // Styles
+    document.querySelectorAll('input[name="style"]:checked').forEach(cb => {
+        selections.styles.push(cb.value);
+    });
+
+    // Colors
+    document.querySelectorAll('input[name="color"]:checked').forEach(cb => {
+        selections.colors.push(cb.value);
+    });
+
+    // Ethics
+    document.querySelectorAll('input[name="ethics"]:checked').forEach(cb => {
+        selections.ethics.push(cb.value);
+    });
+
+    // Persona
+    const persona = document.querySelector('input[name="persona"]:checked');
+    selections.persona = persona ? persona.value : 'ic';
+
+    return selections;
+}
+
+function buildSkillMd(selections) {
+    const timestamp = new Date().toISOString();
+    const styleList = selections.styles.length > 0
+        ? selections.styles.map(s => `- ${s}`).join('\n')
+        : '- (No style selected)';
+    const colorList = selections.colors.length > 0
+        ? selections.colors.map(c => `- ${c}`).join('\n')
+        : '- (No color selected)';
+    const ethicsList = selections.ethics.length > 0
+        ? selections.ethics.map(e => `- ${e}`).join('\n')
+        : '- (No ethics check selected)';
+
+    return `---
+name: Generated UX Agent Skill
+generated_at: ${timestamp}
+persona: ${selections.persona}
+---
+
+# UX Agent Skill Definition
+
+This skill was generated from the COT Audit Tab in the AI/UX System Dataset viewer.
+
+## Required Styles
+${styleList}
+
+## Required Color Palettes
+${colorList}
+
+## Required Ethics Checks
+${ethicsList}
+
+## Persona Perspective
+- **Role**: ${selections.persona === 'ic' ? 'Individual Contributor (IC)' : 'Manager'}
+
+## Data Sources
+Use the following data sources from the dataset:
+- \`data/styles.csv\` - Filter by selected styles
+- \`data/colors.csv\` - Filter by selected color tones
+- \`data/dark_patterns_annotated.json\` - For ethics checks
+
+## Instructions
+1. Load the specified data sources.
+2. Apply the style preferences when generating UI recommendations.
+3. Use the selected color palette guidelines.
+4. Run the specified ethics checks before final output.
+5. Adopt the ${selections.persona === 'ic' ? 'IC' : 'Manager'} perspective in critiques.
+
+## Traceability
+All outputs from this skill should include:
+- A reference to the data item ID used
+- The reasoning step (COT) for each recommendation
+- Log following \`trace_schema.json\` format
+
+---
+*Generated by AI/UX System Dataset - COT Audit Tab*
+`;
+}
+
+function initLogImport() {
+    const dropZone = document.getElementById('log-drop-zone');
+    const fileInput = document.getElementById('log-file-input');
+    const browseBtn = document.getElementById('browse-log-btn');
+
+    if (!dropZone || !fileInput) return;
+
+    // Browse button
+    if (browseBtn) {
+        browseBtn.addEventListener('click', () => fileInput.click());
+    }
+
+    // Drag events
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const file = e.dataTransfer.files[0];
+        if (file && file.name.endsWith('.json')) {
+            processTraceFile(file);
+        }
+    });
+
+    // File input
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            processTraceFile(file);
+        }
+    });
+}
+
+function processTraceFile(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const trace = JSON.parse(e.target.result);
+            displayTrace(trace);
+        } catch (err) {
+            alert('無法解析 JSON 文件。請確保文件格式正確。');
+            console.error(err);
+        }
+    };
+    reader.readAsText(file);
+}
+
+function displayTrace(trace) {
+    const traceViewer = document.getElementById('trace-viewer');
+    if (!traceViewer) return;
+
+    traceViewer.classList.remove('hidden');
+
+    // Populate metadata
+    document.getElementById('trace-session-id').textContent = trace.session_id || '-';
+    document.getElementById('trace-timestamp').textContent = trace.timestamp || '-';
+    document.getElementById('trace-agent-id').textContent = trace.agent_id || '-';
+    document.getElementById('trace-skill-used').textContent = trace.skill_used || '-';
+
+    // Data source
+    if (trace.data_source) {
+        document.getElementById('trace-data-file').textContent = trace.data_source.file || '-';
+        document.getElementById('trace-data-id').textContent = trace.data_source.row_id || '-';
+    }
+
+    // COT steps
+    const cotList = document.getElementById('trace-cot-list');
+    if (trace.cot_trace && Array.isArray(trace.cot_trace)) {
+        cotList.innerHTML = trace.cot_trace.map(step => `<li>${step}</li>`).join('');
+    } else {
+        cotList.innerHTML = '<li>No COT steps found</li>';
+    }
+
+    // Used/Rejected items
+    const usedItems = document.getElementById('trace-used-items');
+    const rejectedItems = document.getElementById('trace-rejected-items');
+
+    if (trace.used_items && Array.isArray(trace.used_items) && trace.used_items.length > 0) {
+        usedItems.innerHTML = trace.used_items.map(item => `<li>${item}</li>`).join('');
+    } else {
+        usedItems.innerHTML = '<li>-</li>';
+    }
+
+    if (trace.rejected_items && Array.isArray(trace.rejected_items) && trace.rejected_items.length > 0) {
+        rejectedItems.innerHTML = trace.rejected_items.map(item => `<li>${item}</li>`).join('');
+    } else {
+        rejectedItems.innerHTML = '<li>-</li>';
+    }
+
+    // Set default unverified status
+    const statusBadge = document.getElementById('trace-audit-status');
+    statusBadge.textContent = '⏳ Unverified';
+    statusBadge.className = 'audit-badge unverified';
+}
+
+// Initialize COT Audit Tab when DOM ready
+document.addEventListener('DOMContentLoaded', initCOTAuditTab);

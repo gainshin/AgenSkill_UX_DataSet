@@ -31,6 +31,7 @@
                 <button class="nav-btn" data-tab="stacks">技術棧 (Stacks)</button>
                 <button class="nav-btn" data-tab="guidelines">UX 準則 (UX Guidelines)</button>
                 <button class="nav-btn" data-tab="generator">UX agent Skills</button>
+                <button class="nav-btn" data-tab="cot-audit">🕵️ COT Audit</button>
             </nav>
         </div>
     </header>
@@ -1135,6 +1136,143 @@
         </div>
 
 
+        <!-- COT Audit Tab -->
+        <div id="cot-audit-tab" class="tab-content">
+            <div class="cot-audit-header">
+                <h2>🕵️ COT 可復現性審計 <span class="en">(COT Reproducibility Audit)</span></h2>
+                <p class="section-desc">追蹤、重播和驗證 Agent 決策。確保每個設計決策都有數據依據。</p>
+            </div>
+
+            <!-- Path Toggle -->
+            <div class="cot-path-toggle">
+                <button class="path-btn active" data-path="generate">📝 Path A: 標記需求 (Pre-Mark Requirements)</button>
+                <button class="path-btn" data-path="review">📂 Path B: 匯入日誌 (Import Log)</button>
+            </div>
+
+            <!-- Path A: Requirement Pre-Marking -->
+            <div id="cot-path-generate" class="cot-path-content active">
+                <div class="checklist-intro">
+                    <h3>✅ 選擇 UX 數據集項目 (Select Dataset Items)</h3>
+                    <p>勾選您希望 Agent 使用的設計資源，然後生成 skill.md 作為 Agent 的「食譜」。</p>
+                </div>
+
+                <div class="checklist-grid">
+                    <!-- Style Section -->
+                    <div class="checklist-section">
+                        <h4>🎨 風格 (Style)</h4>
+                        <label class="checklist-item"><input type="checkbox" name="style" value="glassmorphism">
+                            Glassmorphism</label>
+                        <label class="checklist-item"><input type="checkbox" name="style" value="neumorphism">
+                            Neumorphism</label>
+                        <label class="checklist-item"><input type="checkbox" name="style" value="cyberpunk">
+                            Cyberpunk</label>
+                        <label class="checklist-item"><input type="checkbox" name="style" value="material"> Material
+                            Design</label>
+                        <label class="checklist-item"><input type="checkbox" name="style" value="brutalism">
+                            Brutalism</label>
+                    </div>
+
+                    <!-- Color Section -->
+                    <div class="checklist-section">
+                        <h4>🌈 色彩配色 (Color Palette)</h4>
+                        <label class="checklist-item"><input type="checkbox" name="color" value="warm"> Warm
+                            Tones</label>
+                        <label class="checklist-item"><input type="checkbox" name="color" value="cool"> Cool
+                            Tones</label>
+                        <label class="checklist-item"><input type="checkbox" name="color" value="monochrome">
+                            Monochrome</label>
+                        <label class="checklist-item"><input type="checkbox" name="color" value="vibrant">
+                            Vibrant</label>
+                    </div>
+
+                    <!-- Ethics Section -->
+                    <div class="checklist-section">
+                        <h4>🛡️ 倫理檢查 (Ethics Check)</h4>
+                        <label class="checklist-item"><input type="checkbox" name="ethics" value="dark-pattern-scan"
+                                checked> Dark Pattern 掃描</label>
+                        <label class="checklist-item"><input type="checkbox" name="ethics" value="wcag-check"> WCAG
+                            無障礙檢查</label>
+                        <label class="checklist-item"><input type="checkbox" name="ethics" value="uicrit-review"> UICrit
+                            設計評審</label>
+                    </div>
+
+                    <!-- Persona Section -->
+                    <div class="checklist-section">
+                        <h4>👤 視角 (Persona)</h4>
+                        <label class="checklist-item"><input type="radio" name="persona" value="ic" checked> 👩‍💻 IC
+                            (Individual Contributor)</label>
+                        <label class="checklist-item"><input type="radio" name="persona" value="manager"> 👔
+                            Manager</label>
+                    </div>
+                </div>
+
+                <div class="generate-actions">
+                    <button id="generate-skill-btn" class="cta-generate-btn">📄 生成 skill.md (Generate skill.md)</button>
+                    <p id="generate-status" class="generate-status"></p>
+                </div>
+
+                <!-- Generated Output Preview -->
+                <div id="skill-preview" class="skill-preview hidden">
+                    <h4>📋 預覽 (Preview)</h4>
+                    <pre id="skill-preview-content"></pre>
+                    <button id="copy-skill-btn" class="copy-btn">📋 複製到剪貼板 (Copy)</button>
+                    <button id="download-skill-btn" class="download-btn">⬇️ 下載 (Download)</button>
+                </div>
+            </div>
+
+            <!-- Path B: Log Replay -->
+            <div id="cot-path-review" class="cot-path-content hidden">
+                <div class="log-import-section">
+                    <h3>📂 匯入 Trace 日誌 (Import Trace Log)</h3>
+                    <p>拖放 <code>trace.json</code> 文件或點擊選擇。日誌必須符合 <code>trace_schema.json</code> 結構。</p>
+
+                    <div id="log-drop-zone" class="log-drop-zone">
+                        <div class="drop-icon">📁</div>
+                        <p>拖放 trace.json 到此處<br><span class="en">Drop trace.json here</span></p>
+                        <input type="file" id="log-file-input" accept=".json" hidden>
+                        <button id="browse-log-btn" class="browse-btn">或點擊選擇文件 (Browse)</button>
+                    </div>
+                </div>
+
+                <!-- Trace Visualization (Hidden until loaded) -->
+                <div id="trace-viewer" class="trace-viewer hidden">
+                    <div class="trace-header">
+                        <h4>📊 Trace 詳情 (Trace Details)</h4>
+                        <span id="trace-audit-status" class="audit-badge unverified">⏳ Unverified</span>
+                    </div>
+
+                    <div class="trace-meta">
+                        <div class="meta-item"><strong>Session ID:</strong> <span id="trace-session-id">-</span></div>
+                        <div class="meta-item"><strong>Timestamp:</strong> <span id="trace-timestamp">-</span></div>
+                        <div class="meta-item"><strong>Agent:</strong> <span id="trace-agent-id">-</span></div>
+                        <div class="meta-item"><strong>Skill:</strong> <span id="trace-skill-used">-</span></div>
+                    </div>
+
+                    <div class="trace-data-source">
+                        <h5>📁 數據來源 (Data Source)</h5>
+                        <code id="trace-data-file">-</code> → <code id="trace-data-id">-</code>
+                    </div>
+
+                    <div class="trace-cot-steps">
+                        <h5>🧠 思維鏈 (Chain-of-Thought)</h5>
+                        <ol id="trace-cot-list" class="cot-steps-list">
+                            <!-- Populated by JS -->
+                        </ol>
+                    </div>
+
+                    <div class="trace-used-rejected">
+                        <div class="used-column">
+                            <h5>✅ 採用項目 (Used Items)</h5>
+                            <ul id="trace-used-items">-</ul>
+                        </div>
+                        <div class="rejected-column">
+                            <h5>❌ 棄用項目 (Rejected Items)</h5>
+                            <ul id="trace-rejected-items">-</ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <footer>

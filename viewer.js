@@ -1897,11 +1897,23 @@ async function loadCritiques() {
 
 function renderUICritScreens(screens) {
     const grid = document.getElementById('critiques-grid');
-    if (!grid) return;
+    console.log('renderUICritScreens called, grid:', grid, 'screens:', screens?.length);
+    if (!grid) {
+        console.error('critiques-grid not found!');
+        return;
+    }
+    if (!screens || screens.length === 0) {
+        console.error('No screens data to render!');
+        return;
+    }
 
     // Flatten to individual critiques for display (take first 3 per screen)
     const allCritiques = [];
     screens.forEach(screen => {
+        if (!screen.critiques) {
+            console.warn('Screen missing critiques:', screen.rico_id);
+            return;
+        }
         const screenCritiques = screen.critiques.slice(0, 3);
         screenCritiques.forEach(c => {
             allCritiques.push({
@@ -1913,6 +1925,8 @@ function renderUICritScreens(screens) {
             });
         });
     });
+
+    console.log('Total critiques to display:', allCritiques.length);
 
     // Take top 60 critiques for display
     const displayCritiques = allCritiques.slice(0, 60);

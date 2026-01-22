@@ -271,75 +271,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SCREEN 3: Context Mode -->
-            <div id="guidelines-screen-context" class="guidelines-screen hidden">
-                <div class="context-header">
-                    <button class="nav-back-btn" onclick="showScreen('library')">← 返回案例列表 (Back to Library)</button>
-                    <div class="active-case-info">
-                        <span class="label">Current Analysis:</span>
-                        <strong id="active-case-title">Account Deletion Flow</strong>
-                    </div>
-                </div>
-
-                <!-- Psychology Principles Reference -->
-                <div class="psychology-section">
-                    <h3>🧠 心理學原理速查 (Psychology Principles Quick Reference)</h3>
-                    <div class="psychology-grid">
-                        <div class="psychology-card" data-tags="account-deletion peak-end-rule">
-                            <strong>Peak-End Rule</strong>
-                            <p>人們根據體驗的峰值和結尾來評判整體體驗，而非平均值。</p>
-                            <span class="psychology-apply">應用：確保關鍵流程（如註冊、購買）的結尾正面。</span>
-                        </div>
-                        <div class="psychology-card" data-tags="logout-flow jakob-law">
-                            <strong>Jakob's Law</strong>
-                            <p>使用者傾向期望你的網站與他們已知的網站運作方式相同。</p>
-                            <span class="psychology-apply">應用：遵循常見 UI 模式，減少學習成本。</span>
-                        </div>
-                        <div class="psychology-card" data-tags="macro-balance cognitive-dissonance">
-                            <strong>Cognitive Dissonance</strong>
-                            <p>當行為與信念矛盾時，人們會感到不適並尋求一致性。</p>
-                            <span class="psychology-apply">應用：避免讓使用者做出與其價值觀矛盾的選擇。</span>
-                        </div>
-                        <div class="psychology-card" data-tags="account-deletion loss-aversion">
-                            <strong>Loss Aversion</strong>
-                            <p>失去某物的痛苦是獲得同等價值事物快樂的兩倍。</p>
-                            <span class="psychology-apply">⚠️ 易被濫用於 Dark Patterns。</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dark Pattern Taxonomy -->
-                <div class="dark-pattern-section">
-                    <h3>🏷️ Dark Pattern 分類法 (Deceptive Pattern Taxonomy)</h3>
-                    <div class="dark-pattern-grid">
-                        <div class="dark-pattern-item severity-high" data-tags="account-deletion">
-                            <strong>Data Hostage 資料挾持</strong>
-                            <p>讓使用者擔心刪除帳號會失去重要資料。</p>
-                        </div>
-                        <div class="dark-pattern-item severity-high" data-tags="macro-balance">
-                            <strong>Confirmshaming 羞辱確認</strong>
-                            <p>使用羞辱性語言讓使用者不敢選擇退出選項。</p>
-                        </div>
-                        <div class="dark-pattern-item severity-medium" data-tags="logout-flow">
-                            <strong>Interaction Friction 互動摩擦</strong>
-                            <p>在不希望使用者執行的操作上增加額外步驟。</p>
-                        </div>
-                        <div class="dark-pattern-item severity-medium">
-                            <strong>Roach Motel 易進難出</strong>
-                            <p>訂閱容易取消難，註冊容易刪帳難。</p>
-                        </div>
-                        <div class="dark-pattern-item severity-low">
-                            <strong>Hidden Costs 隱藏成本</strong>
-                            <p>在結帳最後才顯示額外費用。</p>
-                        </div>
-                        <div class="dark-pattern-item severity-low">
-                            <strong>Trick Questions 陷阱問題</strong>
-                            <p>使用雙重否定或混淆語言誤導使用者。</p>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- UICrit Design Critique Library -->
                 <div class="critique-library-section">
@@ -362,114 +293,16 @@
                         <!-- Will be populated by JavaScript -->
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Dark Pattern Annotated Cases Section -->
-                <div class="dark-pattern-annotated-section">
-                    <h3>🔍 Dark Pattern 標註案例庫 (Annotated Dark Pattern Cases)</h3>
-                    <p class="section-desc">基於 AidUI 數據集結構，展示真實 UI 截圖 + 元件標註 + AI Agent COT 分析</p>
-
-                    <!-- Case Filter -->
-                    <div class="dp-filter-bar">
-                        <select id="dp-filter-severity">
-                            <option value="all">所有嚴重度 (All Severity)</option>
-                            <option value="High">High 🔴</option>
-                            <option value="Medium">Medium 🟡</option>
-                            <option value="Low">Low 🟢</option>
-                        </select>
-                        <select id="dp-filter-type">
-                            <option value="all">所有類型 (All Types)</option>
-                            <option value="Dark">Dark Patterns</option>
-                            <option value="Good">Good Examples</option>
-                            <option value="Neutral">Neutral</option>
-                        </select>
-                        <select id="dp-filter-platform">
-                            <option value="all">所有平台 (All Platforms)</option>
-                            <option value="Web">Web</option>
-                            <option value="Mobile">Mobile</option>
-                        </select>
-                    </div>
-
-                    <!-- Cases Grid -->
-                    <div id="dark-pattern-cases-grid" class="dp-cases-grid">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-
-                    <!-- Modal for Detailed View -->
-                    <div id="dp-modal" class="dp-modal hidden">
-                        <div class="dp-modal-content">
-                            <button class="dp-modal-close" aria-label="Close">&times;</button>
-
-                            <div class="dp-modal-body">
-                                <!-- Left: Screenshot with Bounding Boxes -->
-                                <div class="dp-screenshot-panel">
-                                    <h4>📸 UI Screenshot</h4>
-                                    <div class="screenshot-container">
-                                        <img id="dp-screenshot-img" src="" alt="Dark pattern screenshot">
-                                        <svg id="dp-bounding-boxes" class="bounding-boxes-overlay"
-                                            viewBox="0 0 1200 800">
-                                            <!-- Bounding boxes will be drawn here -->
-                                        </svg>
-                                    </div>
-                                    <div class="screenshot-meta">
-                                        <span id="dp-meta-url"></span>
-                                        <span id="dp-meta-platform"></span>
-                                    </div>
-                                </div>
-
-                                <!-- Right: COT Analysis -->
-                                <div class="dp-analysis-panel">
-                                    <div class="dp-pattern-badge">
-                                        <span id="dp-badge-type" class="pattern-type-badge"></span>
-                                        <span id="dp-badge-severity" class="severity-badge"></span>
-                                    </div>
-
-                                    <h4>🏷️ Pattern Details</h4>
-                                    <div class="dp-detail-item">
-                                        <strong>Subtype:</strong> <span id="dp-subtype"></span>
-                                    </div>
-                                    <div class="dp-detail-item">
-                                        <strong>Psychology:</strong> <span id="dp-psychology"></span>
-                                    </div>
-                                    <div class="dp-detail-item">
-                                        <strong>Component:</strong> <span id="dp-component"></span>
-                                    </div>
-
-                                    <h4>🤖 AI Agent COT Analysis</h4>
-
-                                    <div class="cot-step">
-                                        <div class="cot-step-header">
-                                            <span class="cot-number">1️⃣</span>
-                                            <strong>觀察 (Observation)</strong>
-                                        </div>
-                                        <p id="dp-cot-observation" class="cot-content"></p>
-                                    </div>
-
-                                    <div class="cot-step">
-                                        <div class="cot-step-header">
-                                            <span class="cot-number">2️⃣</span>
-                                            <strong>推理 (Reasoning)</strong>
-                                        </div>
-                                        <p id="dp-cot-reasoning" class="cot-content"></p>
-                                    </div>
-
-                                    <div class="cot-step">
-                                        <div class="cot-step-header">
-                                            <span class="cot-number">3️⃣</span>
-                                            <strong>改善建議 (Remediation)</strong>
-                                        </div>
-                                        <div id="dp-cot-remediation" class="cot-content remediation-list"></div>
-                                    </div>
-
-                                    <div class="dp-citation-section">
-                                        <h5>📚 Citations / 引用出處</h5>
-                                        <p id="dp-citation" class="citation-text"></p>
-                                        <a id="dp-citation-link" href="#" target="_blank" class="citation-link">🔗 View
-                                            Source</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- SCREEN 3: Context Mode -->
+        <div id="guidelines-screen-context" class="guidelines-screen hidden">
+            <div class="context-header">
+                <button class="nav-back-btn" onclick="showScreen('library')">← 返回案例列表 (Back to Library)</button>
+                <div class="active-case-info">
+                    <span class="label">Current Analysis:</span>
+                    <strong id="active-case-title">Account Deletion Flow</strong>
                 </div>
             </div>
 
@@ -477,22 +310,22 @@
             <div class="psychology-section">
                 <h3>🧠 心理學原理速查 (Psychology Principles Quick Reference)</h3>
                 <div class="psychology-grid">
-                    <div class="psychology-card">
+                    <div class="psychology-card" data-tags="account-deletion peak-end-rule">
                         <strong>Peak-End Rule</strong>
                         <p>人們根據體驗的峰值和結尾來評判整體體驗，而非平均值。</p>
                         <span class="psychology-apply">應用：確保關鍵流程（如註冊、購買）的結尾正面。</span>
                     </div>
-                    <div class="psychology-card">
+                    <div class="psychology-card" data-tags="logout-flow jakob-law">
                         <strong>Jakob's Law</strong>
                         <p>使用者傾向期望你的網站與他們已知的網站運作方式相同。</p>
                         <span class="psychology-apply">應用：遵循常見 UI 模式，減少學習成本。</span>
                     </div>
-                    <div class="psychology-card">
+                    <div class="psychology-card" data-tags="macro-balance cognitive-dissonance">
                         <strong>Cognitive Dissonance</strong>
                         <p>當行為與信念矛盾時，人們會感到不適並尋求一致性。</p>
                         <span class="psychology-apply">應用：避免讓使用者做出與其價值觀矛盾的選擇。</span>
                     </div>
-                    <div class="psychology-card">
+                    <div class="psychology-card" data-tags="account-deletion loss-aversion">
                         <strong>Loss Aversion</strong>
                         <p>失去某物的痛苦是獲得同等價值事物快樂的兩倍。</p>
                         <span class="psychology-apply">⚠️ 易被濫用於 Dark Patterns。</span>
@@ -504,15 +337,15 @@
             <div class="dark-pattern-section">
                 <h3>🏷️ Dark Pattern 分類法 (Deceptive Pattern Taxonomy)</h3>
                 <div class="dark-pattern-grid">
-                    <div class="dark-pattern-item severity-high">
+                    <div class="dark-pattern-item severity-high" data-tags="account-deletion">
                         <strong>Data Hostage 資料挾持</strong>
                         <p>讓使用者擔心刪除帳號會失去重要資料。</p>
                     </div>
-                    <div class="dark-pattern-item severity-high">
+                    <div class="dark-pattern-item severity-high" data-tags="macro-balance">
                         <strong>Confirmshaming 羞辱確認</strong>
                         <p>使用羞辱性語言讓使用者不敢選擇退出選項。</p>
                     </div>
-                    <div class="dark-pattern-item severity-medium">
+                    <div class="dark-pattern-item severity-medium" data-tags="logout-flow">
                         <strong>Interaction Friction 互動摩擦</strong>
                         <p>在不希望使用者執行的操作上增加額外步驟。</p>
                     </div>
@@ -530,6 +363,8 @@
                     </div>
                 </div>
             </div>
+
+
 
             <!-- Dark Pattern Annotated Cases Section -->
             <div class="dark-pattern-annotated-section">
@@ -637,39 +472,205 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- References Section -->
-                <div class="references-section">
-                    <h4>📚 References / 參考文獻</h4>
-                    <ol class="references-list">
-                        <li id="ref-lee2025">
-                            Lee, J., Kim, S., Park, H. (2025).
-                            <em>Building UI/UX Dataset for Dark Pattern Detection and YOLOv12x-based Real-Time Object
-                                Recognition Detection System</em>.
-                            arXiv:2512.18269.
-                            <a href="https://arxiv.org/abs/2512.18269"
-                                target="_blank">https://arxiv.org/abs/2512.18269</a>
-                        </li>
-                        <li id="ref-brignull2023">
-                            Brignull, H. (2023). <em>Dark Patterns Taxonomy</em>. Deceptive.design.
-                            <a href="https://www.deceptive.design" target="_blank">https://www.deceptive.design</a>
-                        </li>
-                        <li id="ref-gray2018">
-                            Gray, C. M., Kou, Y., Battles, B., Hoggatt, J., & Toombs, A. L. (2018).
-                            <em>The Dark (Patterns) Side of UX Design</em>. CHI 2018.
-                        </li>
-                        <li id="ref-mathur2019">
-                            Mathur, A., Acar, G., Friedman, M. J., Lucherini, E., Mayer, J., Chetty, M., & Narayanan, A.
-                            (2019).
-                            <em>Dark Patterns at Scale: Findings from a Crawl of 11K Shopping Websites</em>. CHI 2019.
-                        </li>
-                        <li id="ref-wcag">
-                            W3C. (2018). <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>.
-                            <a href="https://www.w3.org/TR/WCAG21/" target="_blank">https://www.w3.org/TR/WCAG21/</a>
-                        </li>
-                    </ol>
+        <!-- Psychology Principles Reference -->
+        <div class="psychology-section">
+            <h3>🧠 心理學原理速查 (Psychology Principles Quick Reference)</h3>
+            <div class="psychology-grid">
+                <div class="psychology-card">
+                    <strong>Peak-End Rule</strong>
+                    <p>人們根據體驗的峰值和結尾來評判整體體驗，而非平均值。</p>
+                    <span class="psychology-apply">應用：確保關鍵流程（如註冊、購買）的結尾正面。</span>
+                </div>
+                <div class="psychology-card">
+                    <strong>Jakob's Law</strong>
+                    <p>使用者傾向期望你的網站與他們已知的網站運作方式相同。</p>
+                    <span class="psychology-apply">應用：遵循常見 UI 模式，減少學習成本。</span>
+                </div>
+                <div class="psychology-card">
+                    <strong>Cognitive Dissonance</strong>
+                    <p>當行為與信念矛盾時，人們會感到不適並尋求一致性。</p>
+                    <span class="psychology-apply">應用：避免讓使用者做出與其價值觀矛盾的選擇。</span>
+                </div>
+                <div class="psychology-card">
+                    <strong>Loss Aversion</strong>
+                    <p>失去某物的痛苦是獲得同等價值事物快樂的兩倍。</p>
+                    <span class="psychology-apply">⚠️ 易被濫用於 Dark Patterns。</span>
                 </div>
             </div>
+        </div>
+
+        <!-- Dark Pattern Taxonomy -->
+        <div class="dark-pattern-section">
+            <h3>🏷️ Dark Pattern 分類法 (Deceptive Pattern Taxonomy)</h3>
+            <div class="dark-pattern-grid">
+                <div class="dark-pattern-item severity-high">
+                    <strong>Data Hostage 資料挾持</strong>
+                    <p>讓使用者擔心刪除帳號會失去重要資料。</p>
+                </div>
+                <div class="dark-pattern-item severity-high">
+                    <strong>Confirmshaming 羞辱確認</strong>
+                    <p>使用羞辱性語言讓使用者不敢選擇退出選項。</p>
+                </div>
+                <div class="dark-pattern-item severity-medium">
+                    <strong>Interaction Friction 互動摩擦</strong>
+                    <p>在不希望使用者執行的操作上增加額外步驟。</p>
+                </div>
+                <div class="dark-pattern-item severity-medium">
+                    <strong>Roach Motel 易進難出</strong>
+                    <p>訂閱容易取消難，註冊容易刪帳難。</p>
+                </div>
+                <div class="dark-pattern-item severity-low">
+                    <strong>Hidden Costs 隱藏成本</strong>
+                    <p>在結帳最後才顯示額外費用。</p>
+                </div>
+                <div class="dark-pattern-item severity-low">
+                    <strong>Trick Questions 陷阱問題</strong>
+                    <p>使用雙重否定或混淆語言誤導使用者。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dark Pattern Annotated Cases Section -->
+        <div class="dark-pattern-annotated-section">
+            <h3>🔍 Dark Pattern 標註案例庫 (Annotated Dark Pattern Cases)</h3>
+            <p class="section-desc">基於 AidUI 數據集結構，展示真實 UI 截圖 + 元件標註 + AI Agent COT 分析</p>
+
+            <!-- Case Filter -->
+            <div class="dp-filter-bar">
+                <select id="dp-filter-severity">
+                    <option value="all">所有嚴重度 (All Severity)</option>
+                    <option value="High">High 🔴</option>
+                    <option value="Medium">Medium 🟡</option>
+                    <option value="Low">Low 🟢</option>
+                </select>
+                <select id="dp-filter-type">
+                    <option value="all">所有類型 (All Types)</option>
+                    <option value="Dark">Dark Patterns</option>
+                    <option value="Good">Good Examples</option>
+                    <option value="Neutral">Neutral</option>
+                </select>
+                <select id="dp-filter-platform">
+                    <option value="all">所有平台 (All Platforms)</option>
+                    <option value="Web">Web</option>
+                    <option value="Mobile">Mobile</option>
+                </select>
+            </div>
+
+            <!-- Cases Grid -->
+            <div id="dark-pattern-cases-grid" class="dp-cases-grid">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <!-- Modal for Detailed View -->
+            <div id="dp-modal" class="dp-modal hidden">
+                <div class="dp-modal-content">
+                    <button class="dp-modal-close" aria-label="Close">&times;</button>
+
+                    <div class="dp-modal-body">
+                        <!-- Left: Screenshot with Bounding Boxes -->
+                        <div class="dp-screenshot-panel">
+                            <h4>📸 UI Screenshot</h4>
+                            <div class="screenshot-container">
+                                <img id="dp-screenshot-img" src="" alt="Dark pattern screenshot">
+                                <svg id="dp-bounding-boxes" class="bounding-boxes-overlay" viewBox="0 0 1200 800">
+                                    <!-- Bounding boxes will be drawn here -->
+                                </svg>
+                            </div>
+                            <div class="screenshot-meta">
+                                <span id="dp-meta-url"></span>
+                                <span id="dp-meta-platform"></span>
+                            </div>
+                        </div>
+
+                        <!-- Right: COT Analysis -->
+                        <div class="dp-analysis-panel">
+                            <div class="dp-pattern-badge">
+                                <span id="dp-badge-type" class="pattern-type-badge"></span>
+                                <span id="dp-badge-severity" class="severity-badge"></span>
+                            </div>
+
+                            <h4>🏷️ Pattern Details</h4>
+                            <div class="dp-detail-item">
+                                <strong>Subtype:</strong> <span id="dp-subtype"></span>
+                            </div>
+                            <div class="dp-detail-item">
+                                <strong>Psychology:</strong> <span id="dp-psychology"></span>
+                            </div>
+                            <div class="dp-detail-item">
+                                <strong>Component:</strong> <span id="dp-component"></span>
+                            </div>
+
+                            <h4>🤖 AI Agent COT Analysis</h4>
+
+                            <div class="cot-step">
+                                <div class="cot-step-header">
+                                    <span class="cot-number">1️⃣</span>
+                                    <strong>觀察 (Observation)</strong>
+                                </div>
+                                <p id="dp-cot-observation" class="cot-content"></p>
+                            </div>
+
+                            <div class="cot-step">
+                                <div class="cot-step-header">
+                                    <span class="cot-number">2️⃣</span>
+                                    <strong>推理 (Reasoning)</strong>
+                                </div>
+                                <p id="dp-cot-reasoning" class="cot-content"></p>
+                            </div>
+
+                            <div class="cot-step">
+                                <div class="cot-step-header">
+                                    <span class="cot-number">3️⃣</span>
+                                    <strong>改善建議 (Remediation)</strong>
+                                </div>
+                                <div id="dp-cot-remediation" class="cot-content remediation-list"></div>
+                            </div>
+
+                            <div class="dp-citation-section">
+                                <h5>📚 Citations / 引用出處</h5>
+                                <p id="dp-citation" class="citation-text"></p>
+                                <a id="dp-citation-link" href="#" target="_blank" class="citation-link">🔗 View
+                                    Source</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- References Section -->
+            <div class="references-section">
+                <h4>📚 References / 參考文獻</h4>
+                <ol class="references-list">
+                    <li id="ref-lee2025">
+                        Lee, J., Kim, S., Park, H. (2025).
+                        <em>Building UI/UX Dataset for Dark Pattern Detection and YOLOv12x-based Real-Time Object
+                            Recognition Detection System</em>.
+                        arXiv:2512.18269.
+                        <a href="https://arxiv.org/abs/2512.18269" target="_blank">https://arxiv.org/abs/2512.18269</a>
+                    </li>
+                    <li id="ref-brignull2023">
+                        Brignull, H. (2023). <em>Dark Patterns Taxonomy</em>. Deceptive.design.
+                        <a href="https://www.deceptive.design" target="_blank">https://www.deceptive.design</a>
+                    </li>
+                    <li id="ref-gray2018">
+                        Gray, C. M., Kou, Y., Battles, B., Hoggatt, J., & Toombs, A. L. (2018).
+                        <em>The Dark (Patterns) Side of UX Design</em>. CHI 2018.
+                    </li>
+                    <li id="ref-mathur2019">
+                        Mathur, A., Acar, G., Friedman, M. J., Lucherini, E., Mayer, J., Chetty, M., & Narayanan, A.
+                        (2019).
+                        <em>Dark Patterns at Scale: Findings from a Crawl of 11K Shopping Websites</em>. CHI 2019.
+                    </li>
+                    <li id="ref-wcag">
+                        W3C. (2018). <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>.
+                        <a href="https://www.w3.org/TR/WCAG21/" target="_blank">https://www.w3.org/TR/WCAG21/</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
         </div>
 
         <!-- Standard Guidelines Filter -->

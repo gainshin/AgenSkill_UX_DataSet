@@ -1,3 +1,8 @@
+---
+name: ui-critique
+description: A skill to generate professional-grade UI design critiques following the UICrit methodology and Google UIST '24 standards.
+---
+
 # UI Critique Skill
 
 ## Overview

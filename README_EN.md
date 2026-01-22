@@ -41,6 +41,18 @@ Supports **Claude Code**, **Cursor**, **Kiro**, **GitHub Copilot**, and other AI
 
 👉 **[View Detailed Usage Guide](CLAUDE.md)**
 
+### 🛠️ Supported IDEs
+Optimized for AI-assisted development environments with automatic context loading:
+*   **Antigravity** (Deepmind Advanced Agentic Coding)
+*   **VSCode** (with Copilot/Cursor)
+*   **Claude Code**
+*   **Cursor** / **Windsurf**
+
+### 🕵️ Tracking Agent Protocol
+When using the `/ai-ux-sys-dataset` command or activating this dataset in supported IDEs, the **Tracking Agent** is automatically engaged:
+1.  **Auto-Logging**: Your design decisions are logged into `trace.json`.
+2.  **COT Auditing**: Ensures that generated UX recommendations are reproducible.
+
 Command: `/ai-ux-sys-dataset`
 
 ---
@@ -116,6 +128,18 @@ The Generator tab now features a **Card-based Skill Library** integrated from `s
     *   **Best Practices**: Applying WCAG and domain-specific guidelines (e.g., Clinical UX)
 4.  **Skill Output Layer**
     *   Generates `skill.md`: The "Recipe" for the Agent, documenting the complete history from ingredient selection (Tokens) to cooking steps (Flows).
+
+### 5. 🕵️ Tracking Agent (COT Auditor)
+Acts as a "Black Box Flight Recorder" to track and audit Agent decision-making.
+- **Auto-Logging**: Automatically records all design decisions and Prompt Context.
+- **COT Replication**: Verifies if the Chain-of-Thought from other agents is reproducible, preventing hallucinations.
+- **Location**: `claude/skill/tracking-agent/`
+
+### 6. ⛏️ UX Repo Miner (Resource)
+A dedicated Skill that treats GitHub as a UX ammunition depot.
+- **Search & Analyze**: Automatically mines complementary UX datasets and tools.
+- **Compatibility**: Prioritizes open-source resources that complement this dataset.
+- **Location**: `claude/skill/ux-repo-miner/`
 
 ---
 

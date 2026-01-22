@@ -42,6 +42,18 @@
 
 👉 **[查看詳細使用指南 (Usage Guide)](CLAUDE.md)**
 
+### 🛠️ 支援 IDE (Supported IDEs)
+本專案已為以下 AI 輔助開發環境優化，支援自動上下文加載與技能調用：
+*   **Antigravity** (Deepmind Advanced Agentic Coding)
+*   **VSCode** (配合 Copilot/Cursor)
+*   **Claude Code**
+*   **Cursor** / **Windsurf**
+
+### 🕵️ Tracking Agent Protocol
+當您在上述 IDE 中使用 `/ai-ux-sys-dataset` 指令或啟用本數據集時，系統將自動啟動 **Tracking Agent**：
+1.  **自動日誌 (Auto-Logging)**: 您的設計決策將被記錄為 `trace.json`。
+2.  **思維鏈審計 (COT Auditing)**: 確保生成的 UX 建議具有可復現性 (Reproducibility)。
+
 ---
 
 ## 🏗️ 核心功能詳解
@@ -115,6 +127,18 @@ Generator 分頁現在整合了來自 `skills.rest` 的 **卡片式技能庫 (Sk
     *   **Best Practices**: 應用 WCAG 與領域準則 (如 Clinical UX)
 4.  **技能生成層 (Skill Output Layer)**
     *   產生 `skill.md`：作為 Agent 的「食譜」，詳細記錄從食材選擇 (Tokens) 到烹飪步驟 (Flows) 的完整履歷。
+
+### 5. 🕵️ Tracking Agent (COT Auditor)
+作為「黑盒飛行記錄器」，追蹤並審計 Agent 的決策過程。
+- **Auto-Logging**: 自動記錄所有設計決策與 Prompt Context。
+- **COT Replication**: 驗證其他 Agent 的思維鏈是否可復現，防止幻覺。
+- **位置**: `claude/skill/tracking-agent/`
+
+### 6. ⛏️ UX Repo Miner (Resource)
+將 GitHub 視為 UX 彈藥庫的專用 Skill。
+- **Search & Analyze**: 自動挖掘互補性高的 UX 數據集與工具。
+- **Compatibility**: 優先標記與本數據集互補的開源資源。
+- **位置**: `claude/skill/ux-repo-miner/`
 
 ---
 

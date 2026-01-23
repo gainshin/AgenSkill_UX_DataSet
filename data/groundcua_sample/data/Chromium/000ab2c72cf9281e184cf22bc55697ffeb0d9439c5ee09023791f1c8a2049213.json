@@ -1,0 +1,518 @@
+[
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      17.460003662109376,
+      163.22799331665038,
+      70.26000366210937,
+      208.4879933166504
+    ],
+    "text": "logo",
+    "category": "Visual Elements",
+    "id": "8a282194-6b8f-4a94-a084-9b4281986ed2"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      22.260003662109376,
+      918.9240133666992,
+      211.86000366210936,
+      943.7440133666993
+    ],
+    "text": "reset settings",
+    "category": "Sidebar",
+    "id": "ce5a004f-ffa6-4ea5-8a33-70c367b6b6ea"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      159.06000366210938,
+      889.7240133666992,
+      214.26000366210937,
+      918.9240133666992
+    ],
+    "text": "ccursor",
+    "category": "Navigation",
+    "id": "df90ff4e-3024-43bf-8313-328fd5144227"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      10.260053466796874,
+      851.7639705932617,
+      257.46005346679686,
+      904.3239705932616
+    ],
+    "text": "system",
+    "category": "Sidebar",
+    "id": "4af46547-39f3-4f16-8cc5-ca075a96f3b9"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      19.860003662109374,
+      802.1240133666993,
+      202.26000366210937,
+      843.0040133666992
+    ],
+    "text": "accessibility",
+    "category": "Sidebar",
+    "id": "e907b85d-6b63-4900-91d7-e89b66448b0b"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      29.460003662109376,
+      753.9440133666992,
+      192.66000366210938,
+      793.3640133666993
+    ],
+    "text": "downloads",
+    "category": "Sidebar",
+    "id": "b3d5d679-853d-48f3-8e7c-617ebf0b3a6f"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      22.260003662109376,
+      714.5240133666993,
+      183.06000366210938,
+      743.7240133666992
+    ],
+    "text": "languages",
+    "category": "Sidebar",
+    "id": "d31b4219-632a-4ea8-aaca-1a09f5783ab7"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      24.660003662109375,
+      634.2240133666992,
+      190.26000366210937,
+      675.1040133666992
+    ],
+    "text": "on startup",
+    "category": "Sidebar",
+    "id": "243845ab-3592-4a62-94c4-581267f79c80"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      27.060003662109377,
+      596.2640133666991,
+      240.6600036621094,
+      622.5440133666992
+    ],
+    "text": "default browser",
+    "category": "Sidebar",
+    "id": "d56eb804-b077-42db-b6cb-95e82be52b66"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      12.660003662109375,
+      540.7840133666991,
+      226.2600036621094,
+      583.1240133666993
+    ],
+    "text": "search engine",
+    "category": "Sidebar",
+    "id": "ff7fd60e-1dc6-4f9f-8293-dfd475c9770d"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      31.860003662109378,
+      486.7640133666992,
+      202.26000366210937,
+      529.1040133666993
+    ],
+    "text": "appearance",
+    "category": "Sidebar",
+    "id": "157bdd88-35f6-4c18-bcab-66caa085f85e"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      17.460003662109376,
+      438.5840133666992,
+      209.46000366210936,
+      480.9240133666992
+    ],
+    "text": "AI innivations",
+    "category": "Sidebar",
+    "id": "980fcdb3-a723-415b-8f18-b9a3342a28da"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      24.660003662109375,
+      386.0240133666992,
+      187.86000366210936,
+      431.28401336669924
+    ],
+    "text": "performance",
+    "category": "Sidebar",
+    "id": "da645da6-74f5-4c76-a67b-4fca82863bea"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      17.460003662109376,
+      334.34,
+      250.26000366210934,
+      373.76
+    ],
+    "text": "privacy and security",
+    "category": "Sidebar",
+    "id": "52bc8630-e8bd-49d4-807b-a5df26a06c2d"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      22.259985351562502,
+      290.54,
+      269.45998535156247,
+      325.58
+    ],
+    "text": "autofill and passwords",
+    "category": "Sidebar",
+    "id": "f1fbfc39-09f0-4a9c-9566-01f7c7a457d8"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      24.660003662109375,
+      237.98,
+      243.0600036621094,
+      280.32
+    ],
+    "text": "you and google",
+    "category": "Sidebar",
+    "id": "2c07feee-962f-44a9-b305-b1e1169d60b9"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      75.06000366210937,
+      167.9,
+      204.66000366210938,
+      210.24
+    ],
+    "text": "settings",
+    "category": "Information Display",
+    "id": "34116dbc-53f1-427c-86a1-6947a211ba21"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      526.2600036621094,
+      449.68,
+      1395.0600036621095,
+      506.62
+    ],
+    "text": "import bookmarks and settings",
+    "category": "Menu",
+    "id": "aaccf5dc-c4b8-44f8-adcf-60668918d6ae"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      533.459912109375,
+      381.05999999999995,
+      1387.859912109375,
+      436.54
+    ],
+    "text": "sync and google search",
+    "category": "Menu",
+    "id": "51271884-0902-4670-ac9e-363090cb35b3"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      499.8600036621094,
+      249.66,
+      687.0600036621094,
+      284.7
+    ],
+    "text": "you and google",
+    "category": "Information Display",
+    "id": "cdb07244-fd1f-4c4e-9e7c-767bd88f758e"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      531.0599853515625,
+      300.76,
+      1390.2599853515624,
+      372.29999999999995
+    ],
+    "text": "work",
+    "category": "Menu",
+    "id": "8592e118-6049-4806-b5de-04b824ebb3f1"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      526.2600036621094,
+      157.67999999999998,
+      1407.0600036621095,
+      217.54
+    ],
+    "text": "search settings",
+    "category": "Input Elements",
+    "id": "0e57fa48-5a66-455d-9fed-6affafbc0fd1"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      348.6600036621094,
+      14.6,
+      394.2600036621094,
+      37.96
+    ],
+    "text": "new tab",
+    "category": "Button",
+    "id": "9edd730b-7c8a-436d-92ec-d7327a8b5f80"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      53.459985351562494,
+      8.76,
+      300.6599853515625,
+      43.8
+    ],
+    "text": "setting",
+    "category": "Information Display",
+    "id": "e8b8e102-baae-417c-9ea7-07b06d93dcb7"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      5.460003662109375,
+      10.22,
+      48.66000366210937,
+      45.26
+    ],
+    "text": "search tabs",
+    "category": "Menu",
+    "id": "08ca134b-0460-438f-95d1-ffda19305a5a"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      1699.8600036621092,
+      58.4,
+      1733.4600036621096,
+      96.36000000000001
+    ],
+    "text": "bookmark this tab",
+    "category": "Button",
+    "id": "2e0baaec-8901-4d1f-912d-4684b112bf72"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      1757.46005859375,
+      8.76,
+      1798.26005859375,
+      40.88
+    ],
+    "text": "minimize",
+    "category": "Button",
+    "id": "2238544f-259f-4582-958a-933e85a95eea"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      1762.2602050781252,
+      61.02798217773437,
+      1800.660205078125,
+      91.68798217773437
+    ],
+    "text": "chrome labs",
+    "category": "Menu",
+    "id": "aeb10d36-7df1-40a0-b98d-13fe418f21cc"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      1807.8600769042969,
+      8.467993316650391,
+      1851.060076904297,
+      43.50799331665039
+    ],
+    "text": "maximize",
+    "category": "Button",
+    "id": "13acd18a-a4fc-4f03-ba06-f0fd5294198f"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      1870.260076904297,
+      11.387993316650391,
+      1915.8600769042969,
+      40.58799331665039
+    ],
+    "text": "close",
+    "category": "Button",
+    "id": "eb231258-2e98-47f6-9a54-55769cbd78b8"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      1819.8599635620117,
+      63.94800077972414,
+      1867.859963562012,
+      98.98800077972413
+    ],
+    "text": "work",
+    "category": "Menu",
+    "id": "6eefc36e-3c77-4cbc-b549-16440d78be42"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      1876.800272067742,
+      61.796403018726664,
+      1910.4002720677422,
+      98.29640301872666
+    ],
+    "text": "customize and control chromium",
+    "category": "Menu",
+    "id": "ff142483-0061-4528-a1a7-32ce940a43fa"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      96.66000366210938,
+      69.78799331665039,
+      139.8600036621094,
+      90.2279933166504
+    ],
+    "text": "reload",
+    "category": "Button",
+    "id": "3d569033-178e-40ae-bcd2-d0aa05a578bf"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      55.860003662109364,
+      62.487993316650396,
+      87.06000366210938,
+      90.2279933166504
+    ],
+    "text": "go forward",
+    "category": "Button",
+    "id": "df6cc252-10d4-4796-9dab-b358283c0b74"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      7.860003662109374,
+      62.487993316650396,
+      41.46000366210937,
+      98.98799331665039
+    ],
+    "text": "go back",
+    "category": "Button",
+    "id": "3b1b90fd-da2c-4a92-b577-ff6dc013946e"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      3.0599853515625,
+      107.7480044555664,
+      55.8599853515625,
+      145.7080044555664
+    ],
+    "text": "tab groups",
+    "category": "Menu",
+    "id": "2b19559f-b03c-4f28-b3c6-c7e7fb296bd0"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      302.7750732421875,
+      7.4140625,
+      338.7750732421875,
+      42.4540625
+    ],
+    "text": "close tab",
+    "category": "Button",
+    "id": "ff67b74f-e1b9-4a4f-b2e1-be63a04de6c5"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      159.12784671926397,
+      65.4219370417352,
+      437.527846719264,
+      99.0019370417352
+    ],
+    "text": "Chromium  chrome://settings",
+    "category": "Information Display",
+    "id": "556f0e9e-1044-41f2-9ff3-7a5afe98ae88"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      283.734375,
+      995.6087890624999,
+      318.234375,
+      1016.5962890625
+    ],
+    "text": "move down",
+    "category": "Button",
+    "id": "64e41df4-84de-40ea-b367-d0ff2523fcf8"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      286.2391304347826,
+      222.27309782608697,
+      323.80434782608694,
+      242.58614130434785
+    ],
+    "text": "move up",
+    "category": "Button",
+    "id": "95fcf295-1d10-48fd-ab03-3c4afb72c795"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      289.78698581861414,
+      249.2513586956522,
+      325.78698581861414,
+      988.0113586956523
+    ],
+    "text": "vertical scroll bar",
+    "category": "Navigation",
+    "id": "e973e334-e065-40cc-8648-28acdad933c7"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      175.63043478260875,
+      985.2817934782609,
+      223.6304347826087,
+      1011.9426630434784
+    ],
+    "text": "link",
+    "category": "Button",
+    "id": "6de1db19-df3e-4159-8bc3-b2f52b2e1d5b"
+  },
+  {
+    "image_path": "Chromium/000ab2c72cf9281e184cf22bc55697ffeb0d9439c5ee09023791f1c8a2049213.png",
+    "bbox": [
+      3.443181818181818,
+      1000.8154829545454,
+      180.17045454545453,
+      1018.7336647727271
+    ],
+    "text": "chrome://settings/system",
+    "category": "Information Display",
+    "id": "dcf81155-7ebd-47e4-9ae1-ade6fe242046"
+  }
+]

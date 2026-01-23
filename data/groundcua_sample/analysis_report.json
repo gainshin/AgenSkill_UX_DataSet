@@ -1,0 +1,324 @@
+{
+  "summary": {
+    "total_elements": 27,
+    "issues_found": 14,
+    "passed_checks": 3,
+    "severity": "high"
+  },
+  "issues": [
+    {
+      "element_id": "b9ff7026-18a7-4507-95c8-076334748aec",
+      "bbox": [
+        44.395,
+        11.345714285714287,
+        128.0625,
+        30.942857142857143
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        83.7,
+        19.6
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "4b09d24c-cfa9-403f-be37-ea1ef6d0022d",
+      "bbox": [
+        81.96,
+        50.540000000000006,
+        109.28,
+        74.26285714285714
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        27.3,
+        23.7
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "40c3366b-d2df-4242-8b79-97a822613a15",
+      "bbox": [
+        124.6475,
+        49.50857142857143,
+        343.2075,
+        76.32571428571428
+      ],
+      "category": "Input Elements",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        218.6,
+        26.8
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "3163f83b-b30c-4faf-891c-08382a324021",
+      "bbox": [
+        244.17249999999999,
+        12.377142857142857,
+        264.6625,
+        29.91142857142857
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        20.5,
+        17.5
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "b59f7711-6770-423d-9a7f-529bc1987ff6",
+      "bbox": [
+        281.7375,
+        7.22,
+        305.6425,
+        30.942857142857143
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        23.9,
+        23.7
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "24019f20-bab9-4a22-acdd-ce8bceaf0122",
+      "bbox": [
+        974.9825,
+        362.0314285714286,
+        1004.01,
+        386.7857142857143
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        29.0,
+        24.8
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "2455533b-2fc4-40d7-b963-0828c1f52305",
+      "bbox": [
+        1015.9625,
+        364.0942857142858,
+        1043.2825,
+        385.7542857142857
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        27.3,
+        21.7
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "acb9e753-fe16-49ba-a130-ecc3bcf6385e",
+      "bbox": [
+        1195.25,
+        51.57142857142857,
+        1219.155,
+        73.23142857142857
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        23.9,
+        21.7
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "176a0537-fe1e-4db5-9ffe-209f1a6eed29",
+      "bbox": [
+        1270.38,
+        107.26857142857143,
+        1295.9925,
+        132.02285714285713
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        25.6,
+        24.8
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "77490825-5782-4d3e-b128-54116003aede",
+      "bbox": [
+        1239.645,
+        52.60285714285714,
+        1270.38,
+        74.26285714285714
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        30.7,
+        21.7
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "7ffcd527-3c36-4f06-9a28-50634569fbc2",
+      "bbox": [
+        1297.7,
+        49.50857142857143,
+        1321.605,
+        74.26285714285714
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        23.9,
+        24.8
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "4cf5dc68-47a7-4f04-ab91-19388b873000",
+      "bbox": [
+        1239.645,
+        9.282857142857143,
+        1270.38,
+        27.848571428571425
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        30.7,
+        18.6
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "6021a314-5846-4144-a429-bef2f4cedc5d",
+      "bbox": [
+        1284.04,
+        10.314285714285713,
+        1311.36,
+        28.88
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        27.3,
+        18.6
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    },
+    {
+      "element_id": "1b055582-0fb8-4aba-abba-ae912bf1d05b",
+      "bbox": [
+        1326.7275,
+        8.251428571428571,
+        1357.4625,
+        30.942857142857143
+      ],
+      "category": "Button",
+      "issue_type": "touch_target_too_small",
+      "current_size": [
+        30.7,
+        22.7
+      ],
+      "recommended_size": [
+        44,
+        44
+      ],
+      "severity": "high",
+      "fix_suggestion": "增加元素尺寸至少 44x44px"
+    }
+  ],
+  "passed": [
+    {
+      "element_id": "e6b40376-d3eb-4f2a-b653-364ff3ed6eff",
+      "category": "Input Elements",
+      "check": "touch_target",
+      "status": "pass"
+    },
+    {
+      "element_id": "936311d2-1344-4409-80f5-81f915047b80",
+      "category": "Button",
+      "check": "touch_target",
+      "status": "pass"
+    },
+    {
+      "element_id": "ae33630a-c2dc-4cdf-bb0b-908a5b2978e9",
+      "category": "Button",
+      "check": "touch_target",
+      "status": "pass"
+    }
+  ]
+}
